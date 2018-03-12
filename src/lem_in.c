@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/12 13:21:06 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/12 16:51:42 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static int lists_init(t_recurse *infos)
 {
 	char *str;
+
 
 	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1)))
 		return (0);
