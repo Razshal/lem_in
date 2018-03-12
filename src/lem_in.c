@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/12 16:51:42 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/12 18:04:21 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 
 static int lists_init(t_recurse *infos)
 {
-	char *str;
+	char *line;
 
 
 	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1)))
 		return (0);
-	while (get_next_line(0, &str))
+	while (get_next_line(0, &line))
 	{
-
+		if (ft_strchr('-', line))
+			
 	}
 
 	return (1);

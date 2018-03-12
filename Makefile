@@ -6,13 +6,16 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/11 12:32:39 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/12 14:29:56 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 SRC_PATH = src
-SRCS = main.c \
+SRCS = get_list.c \
+	   lem_in.c \
+	   lists.c \
+	   searching.c \
 	   test.c
 OBJ_PATH = obj
 CPPFLAGS = -Iinclude
