@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/12 18:34:40 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/12 19:24:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	alloc_and_add_room(int room_number, int roomtype, t_room_list *rlist)
 	rlist_local = rlist;
 	if (!get_room(room_number, rlist))
 		get_last_item(rlist)->next = new_room(room_number, roomtype);
+	if (get_room(room_number, rlist)->room_type != roomtype)
+		get_room(room_number, rlist)->room_type = roomtype;
 	return (1);
 }
 
@@ -56,6 +58,9 @@ int add_link(char *line, t_room_list *rlist)
 
 	room1 = ft_atoi(line);
 	room2 = ft_atoi(&line[2]);
+	if (!get_room(room1, rlist))
+		alloc_and_add_room(room1, CLASSICROOM, rlist);
 	links = get_room(room1, rlist)->linked_rooms;
-	if (!links && !(links = new_room_links(room2))
+	if (links && !get_room_link_num(room1
+
 }
