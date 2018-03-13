@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:11:55 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/01/29 11:31:30 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/13 18:07:05 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int				printf_flags_char(t_plist *list);
 int				ft_getbyteslength(wchar_t c);
 int				colorprinter(char *str);
 int				get_next_line(const int fd, char **line);
+int				noleaks_get_next_line(const int fd, char **line);
 typedef struct	s_fd
 {
 	int		fd;

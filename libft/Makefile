@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/11 14:57:13 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/13 18:08:11 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRC = ft_atoi.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  get_next_line.c \
+	  noleaks_get_next_line.c \
 	  ft_printf.c \
 	  $(PRINTFUNC)printf_lst.c \
 	  $(PRINTFUNC)printfparser.c \

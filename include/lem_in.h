@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 15:14:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/13 17:57:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,8 @@ t_room_links	*get_lroom_pos(int room_num, int link_num, t_room_list *rlist);
 t_room_links	*get_last_item_link(t_room_links *rlink);
 t_lem_list		*get_lem(int lem_num, t_lem_list *llist);
 int				add_lem(int lem_num, int room_num, t_lem_list *llist);
+int				get_start_num(t_room_list *room);
+int				add_room(int room_number, int roomtype, t_room_list *rlist);
+int				add_link(char *line, t_room_list *rlist);
 
 #endif
