@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 13:14:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/13 15:56:55 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,19 @@ t_room_links *new_room_link(t_room_list *room, int room_type)
 	return (rlink);
 }
 
-int	alloc_and_add_room(int room_number, int roomtype, t_room_list *rlist)
+int	add_room(int room_number, int roomtype, t_room_list *rlist)
 {
 	t_room_list *rlist_local;
 
 	if (!rlist && !(rlist = new_room(room_number, roomtype)))
 		return (0);
-	rlist_local = rlist;
 	if (!get_room(room_number, rlist))
-		get_last_item(rlist)->next = new_room(room_number, roomtype);
-	if (get_room(room_number, rlist)->room_type != roomtype)
+	{
+		rlist_local = (new_room(room_number, roomtype)->next = rlist);
+		rlist = rlist_local;
+	}
+	if (get_room(room_number, rlist)->room_type == CLASSICROOM
+			&& roomtype != CLASSICROOM)
 		get_room(room_number, rlist)->room_type = roomtype;
 	return (1);
 }
@@ -58,9 +61,10 @@ int add_link(char *line, t_room_list *rlist)
 
 	room1 = ft_atoi(line);
 	room2 = ft_atoi(&line[2]);
-	if (!get_room(room1, rlist))
-		alloc_and_add_room(room1, CLASSICROOM, rlist);
+	add_room(room1, CLASSICROOM, rlist);
+	add_room(room2, CLASSICROOM, rlist);
 	links = get_room(room1, rlist)->linked_rooms;
-	if (links && !get_room_link_num(room1
+	if (links && !get_lroom_num(room1, room2, rlist))
+		new_room_link(
 
 }
