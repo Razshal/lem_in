@@ -1,0 +1,13 @@
+*.o
+*/*.o
+*.a
+*/*.a
+a.out
+main.c
+*.swp
+*.swo
+*.ghc
+*.dSYM/
+lem_in
+*.trace
+out
