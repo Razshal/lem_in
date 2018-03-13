@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/12 19:24:46 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/13 13:14:36 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_room_list *new_room(int room_number, int room_type)
 
 	if (!(rlist = (t_room_list*)malloc(sizeof(t_room_list) * 1)))
 		return (NULL);
-	rlist->room_number = room_number;
+	rlist->room_num = room_number;
 	rlist->room_type = room_type;
 	rlist->linked_rooms = NULL;
 	rlist->next = NULL;
