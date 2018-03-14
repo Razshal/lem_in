@@ -6,13 +6,14 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 13:14:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:35:19 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
+//TODO : find a way to take another path if a lem is in the next room
 
-static int	is_end_room(int room, t_room_list *list)
+int			is_end_room(int room, t_room_list *list)
 {
 	t_room_list *current;
 
@@ -25,7 +26,7 @@ static int	is_end_room(int room, t_room_list *list)
 	return (0);
 }
 
-int			searching(int actual_room, int link, int moove_c, t_recurse *infos)
+int			searching(int start_room, int link, int moove_c, t_recurse *infos)
 {
 	int test;
 	int res;
@@ -33,17 +34,17 @@ int			searching(int actual_room, int link, int moove_c, t_recurse *infos)
 	t_room_list *lroom;
 
 	res = INTMAX;
-	if (is_end_room(actual_room, infos->room_list))
+	if (is_end_room(start_room, infos->room_list))
 		return (SUCCESS);
-	if (!get_lroom_pos(actual_room, 1, infos->room_list))
+	if (!get_lroom_pos(start_room, 1, infos->room_list))
 		return (FAILURE);
-	while ((lroom = get_lroom_pos(actual_room, link, infos->room_list)->room))
+	while ((lroom = get_lroom_pos(start_room, link, infos->room_list)->room))
 	{
 		if ((test = searching(lroom->room_num, link, moove_c + 1, infos)) < res)
 		{
 			res = test;
 			best_path =
-				get_lroom_pos(actual_room, link, infos->room_list)->room;
+				get_lroom_pos(start_room, link, infos->room_list)->room;
 		}
 		link++;
 	}

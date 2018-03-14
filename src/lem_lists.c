@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:57:38 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 17:57:01 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 12:51:26 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		get_start_num(t_room_list *room)
 	while (temp)
 	{
 		if (temp->room_type == START)
-			return (temp->num);
+			return (temp->room_num);
 	}
-	return (FAILURE)
+	return (FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 18:51:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 13:12:16 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static int lists_init(t_recurse *infos)
 {
 	char *line;
 
-	line = NULL;
-	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
+	if ((line = NULL) || !(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
 			|| !get_next_line(0, &line) || !lem_init(ft_atoi(line), infos))
 	{
 		ft_memdel((void**)&line);
@@ -54,7 +53,37 @@ static int lists_init(t_recurse *infos)
 		else if (!add_room(ft_atoi(line), CLASSICROOM, infos->room_list))
 			return (0);
 	}
+	ft_memdel((void**)&line);
 	return (1);
+}
+
+static int	are_all_lems_in_end(t_recurse *infos)
+{
+	int			are_they;
+	t_lem_list	*local_lem;
+
+	are_they = 1;
+	local_lem = infos->lem_list;
+	while (local_lem)
+	{
+		if (!is_end_room(local_lem->room, infos->room_list))
+			are_they = 0;
+		local_lem = local_lem->next;
+	}
+	return (are_they);
+}
+
+static int	moove_lems(t_recurse *infos)
+{
+	t_lem_list	*local_lem;
+	int			destination;
+
+	local_lem = infos->lem_list;
+	while (!are_all_lems_in_end(infos))
+	{
+		if (get_lem(1, local_lem))
+
+	}
 }
 
 int main(void)
