@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/13 15:56:42 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:57:36 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ t_room_list *get_room(int room, t_room_list *rlist)
 	current = rlist;
 	while (current)
 	{
-		if (current->room_num == room)
+		if (current->num == room)
 			return (current);
 	}
 	return (NULL);
 }
 
-t_room_links *get_lroom_pos(int room_num, int link_num, t_room_list *rlist)
+t_room_links *get_lroom_pos(t_room_list *room, int link_num)
 {
 	t_room_links	*link;
 	int				count;
 
 	count = -1;
-	link = get_room(room_num, rlist)->linked_rooms;
+	link = room->l_rooms;
 	while (link && ++count < link_num)
 		link = link->next;
 	if (count == link_num)
@@ -43,10 +43,10 @@ t_room_links *get_lroom_num(int desired_num, int rlink_num, t_room_list *rlist)
 {
 	t_room_links	*link;
 
-	link = get_room(desired_num, rlist)->linked_rooms;
+	link = get_room(desired_num, rlist)->l_rooms;
 	while (link)
 	{
-		if (link->room->room_num == rlink_num)
+		if (link->room->num == rlink_num)
 			return (link);
 		link = link->next;
 	}

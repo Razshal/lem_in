@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/14 13:12:16 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 14:44:52 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	moove_lems(t_recurse *infos)
 	while (!are_all_lems_in_end(infos))
 	{
 		if (get_lem(1, local_lem))
-
+			
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/14 13:35:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:09:54 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			is_end_room(int room, t_room_list *list)
 	current = list;
 	while (current)
 	{
-		if (current->room_num == room && current->room_type == END)
+		if (current->num == room && current->type == END)
 			return (1);
 	}
 	return (0);
@@ -28,26 +28,28 @@ int			is_end_room(int room, t_room_list *list)
 
 int			searching(int start_room, int link, int moove_c, t_recurse *infos)
 {
-	int test;
 	int res;
-	t_room_list *best_path;
-	t_room_list *lroom;
+	t_room_list *path;
+	t_room_list *current_room;
 
 	res = INTMAX;
-	if (is_end_room(start_room, infos->room_list))
+	current_room = infos->room_list;
+	if (current_room->type == END)
 		return (SUCCESS);
-	if (!get_lroom_pos(start_room, 1, infos->room_list))
+	if (!get_lroom_pos(current_room, 1))
 		return (FAILURE);
-	while ((lroom = get_lroom_pos(start_room, link, infos->room_list)->room))
+	while ((current_room = get_lroom_pos(
+					get_room(start_room, infos->room_list), link)->room))
 	{
-		if ((test = searching(lroom->room_num, link, moove_c + 1, infos)) < res)
+		if ((moove_c = searching(current_room->num, link, moove_c + 1, infos))
+				< res && moove_c != FAILURE)
 		{
-			res = test;
-			best_path =
-				get_lroom_pos(start_room, link, infos->room_list)->room;
+			res = moove_c;
+			path = get_lroom_pos(
+					get_room(start_room, infos->room_list), link)->room;
 		}
 		link++;
 	}
-	infos->next_room = best_path;
+	infos->next_room = path;
 	return (moove_c);
 }
