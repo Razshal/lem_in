@@ -6,20 +6,20 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/14 15:57:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:17:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-t_room_list *get_room(int room, t_room_list *rlist)
+t_room_list *get_room(char *room_name, t_room_list *rlist)
 {
 	t_room_list *current;
 
 	current = rlist;
 	while (current)
 	{
-		if (current->num == room)
+		if (!ft_strcmp(current->name, room_name))
 			return (current);
 	}
 	return (NULL);
@@ -39,14 +39,16 @@ t_room_links *get_lroom_pos(t_room_list *room, int link_num)
 	return (NULL);
 }
 
-t_room_links *get_lroom_num(int desired_num, int rlink_num, t_room_list *rlist)
+t_room_links *get_lroom_name(char *name, int rlink_num, t_room_list *rlist)
 {
 	t_room_links	*link;
+	int				count;
 
-	link = get_room(desired_num, rlist)->l_rooms;
+	link = get_room(name, rlist)->l_rooms;
+	count = 0;
 	while (link)
 	{
-		if (link->room->num == rlink_num)
+		if (count == rlink_num++)
 			return (link);
 		link = link->next;
 	}
@@ -72,3 +74,4 @@ t_room_links *get_last_item_link(t_room_links *rlink)
 		local_rlink = local_rlink->next;
 	return (local_rlink);
 }
+
