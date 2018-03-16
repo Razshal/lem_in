@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/14 15:57:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 13:24:36 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_room_links
 
 struct	s_room_list
 {
-	int					num;
+	char				*name;
 	int					type;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
@@ -40,7 +40,7 @@ struct	s_room_list
 typedef struct	s_lem_list
 {
 	int					lem;
-	int					room;
+	char				*room;
 	struct s_lem_list	*next;
 }				t_lem_list;
 
@@ -51,16 +51,17 @@ typedef struct	s_recurse
 	t_room_list	*next_room;
 }				t_recurse;
 
-t_room_list		*get_room(int room, t_room_list *rlist);
+t_room_list		*get_room(char *name, t_room_list *rlist);
 t_room_list		*get_last_item(t_room_list *rlist);
-t_room_links	*get_lroom_num(int room_num, int link_num, t_room_list *rlist);
+t_room_links	*get_lroom_name(char *name, int link_num, t_room_list *rlist);
 t_room_links	*get_lroom_pos(t_room_list *room, int link_num);
 t_room_links	*get_last_item_link(t_room_links *rlink);
 t_lem_list		*get_lem(int lem_num, t_lem_list *llist);
-int				add_lem(int lem_num, int room_num, t_lem_list *llist);
-int				get_start_num(t_room_list *room);
-int				add_room(int room_number, int roomtype, t_room_list *rlist);
+int				add_lem(int lem_num, char *room_name, t_lem_list *llist);
+char			*get_start_name(t_room_list *room);
+int				add_room(char *room_name, int room_type, t_room_list *rlist);
 int				add_link(char *line, t_room_list *rlist);
-int				is_end_room(int room, t_room_list *list);
+int				is_end_room(char *room_name, t_room_list *list);
+int				lists_init(t_recurse *infos);
 
 #endif

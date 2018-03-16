@@ -1,4 +1,4 @@
-#**************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,23 +6,28 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/14 14:59:55 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/16 17:10:25 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
 SRC_PATH = src
-SRCS = get_list.c \
+SRC_NAME = get_list.c \
 	   lem_in.c \
 	   lem_lists.c \
 	   lists.c \
-	   searching.c
+	   searching.c \
+	   lem_checks.c \
+	   lists_init.c
+OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
 CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
+LIBDIR = libft
 CC = clang
 CFLAGS = -Werror -Wall -Wextra
-OBJ_NAME = $(SRC_NAME:.c=.o)
+
+INC_PATH = include
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
@@ -31,26 +36,26 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(LIBFT) $^ -o $@
+	$(CC) $(FLAGS) $^ -o $@
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(LIBFT):
-	make -C libft/
+	make -C $(LIBDIR)
 
 norme:
 	norminette $(SRC)
 	norminette $(INC_PATH)*.h
 
 clean:
-	@rm -fv $(OBJ)
+	rm -fv $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	@make -C libft/ clean
+	make -C $(LIBDIR) clean
 
 fclean: clean
 	rm -fv $(NAME)
-	@make -C libft/ fclean
+	make -C $(LIBDIR) fclean
 
 re: fclean all

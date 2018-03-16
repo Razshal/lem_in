@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/15 15:13:12 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 12:15:24 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	are_all_lems_in_end(t_recurse *infos)
 	}
 	return (are_they);
 }
-
+/*
 static int	moove_lems(t_recurse *infos)
 {
 	t_lem_list	*local_lem;
@@ -40,7 +40,7 @@ static int	moove_lems(t_recurse *infos)
 			
 	}
 }
-
+*/
 int main(void)
 {
 	t_recurse *infos;
