@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/15 17:04:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 17:17:36 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,11 @@ int			add_link(char *line, t_room_list *rlist)
 	char			*room2;
 	t_room_links	*links;
 
-	if (ft_count_words(line, '-') == 2)
-		rooms = ft_strsplit(line, '-');
+	if (!(ft_count_words(line, '-') == 2))
+		return (0);
+	rooms = ft_strsplit(line, '-');
+	room1 = rooms[0];
+	room2 = rooms[1];
 	links = get_room(room1, rlist)->l_rooms;
 	if (!add_lroom(new_room_link(get_room(room2, rlist)), links))
 		return (0);

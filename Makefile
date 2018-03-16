@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/16 17:10:25 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/16 17:59:07 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,26 +36,26 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(FLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(LIBFT):
-	make -C $(LIBDIR)
+	@make -C $(LIBDIR)
 
 norme:
 	norminette $(SRC)
 	norminette $(INC_PATH)*.h
 
 clean:
-	rm -fv $(OBJ)
+	@rm -fv $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || true
-	make -C $(LIBDIR) clean
+	@make -C $(LIBDIR) clean
 
 fclean: clean
-	rm -fv $(NAME)
-	make -C $(LIBDIR) fclean
+	@rm -fv $(NAME)
+	@make -C $(LIBDIR) fclean
 
 re: fclean all

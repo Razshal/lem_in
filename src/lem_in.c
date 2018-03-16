@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 12:15:24 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:08:35 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-static int	are_all_lems_in_end(t_recurse *infos)
+static int	all_lems_in_end(t_recurse *infos)
 {
 	int			are_they;
 	t_lem_list	*local_lem;
@@ -27,24 +27,26 @@ static int	are_all_lems_in_end(t_recurse *infos)
 	}
 	return (are_they);
 }
-/*
+
 static int	moove_lems(t_recurse *infos)
 {
 	t_lem_list	*local_lem;
-	int			destination;
+//	int			destination;
 
 	local_lem = infos->lem_list;
-	while (!are_all_lems_in_end(infos))
+	while (!all_lems_in_end(infos))
 	{
 		if (get_lem(1, local_lem))
-			
+			ft_printf("test");
 	}
+	return (1);
 }
-*/
+
 int main(void)
 {
 	t_recurse *infos;
 
-	if (!lists_init(infos))
+	infos = NULL;
+	if (!lists_init(infos) || !moove_lems(infos))
 		ft_putstr("ERROR");
 }

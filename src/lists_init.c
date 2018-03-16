@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/15 16:05:10 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:09:00 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,40 @@ static int lem_init(int lem_amount, t_recurse *infos)
 	while (lem_amount > 0)
 	{
 		if (!add_lem(
-				lem_nu--, get_start_num(infos->room_list), infos->lem_list))
+				lem_nu--, get_start_name(infos->room_list), infos->lem_list))
 			return (0);
 	}
 	return (1);
 }
 
-static int	is_valid_room(char *line)
+static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
-	int count;
-	int wordcount;
-}
+	char	**rooms;
+	int		res;
 
+	rooms = ft_strsplit(line, ' ');
+	res = add_room(rooms[0], type, infos->room_list);
+	if (!res)
+		ft_memdel_array((void***)rooms);
+	if (res && rooms[1])
+		ft_memdel_array((void***)&rooms[1]);
+	return (res);
+}
 static int	check_and_add_the_right_data(char *line, t_recurse *infos)
 {
+	if (!line)
+		return (0);
 	if (ft_strchr(line, '-') && !add_link(line, infos->room_list))
 		return (0);
 	else if (ft_strstr(line, "##end") && !ft_strstr(line, "##end")[5]
 			&& (!noleaks_get_next_line(0, &line)
-			|| !add_room(ft_atoi(line), END, infos->room_list)))
+			|| !split_and_add_room(line, END, infos)))
 		return (0);
 	else if (ft_strstr(line, "##start") && !(ft_strstr(line, "##start")[7]
-				&& (!noleaks_get_next_line(0, &line)
-				|| !add_room(ft_atoi(line), START, infos->room_list))))
+			&& (!noleaks_get_next_line(0, &line)
+			|| !split_and_add_room(line, START, infos))))
 		return (0);
-	else if (!add_room(ft_atoi(line), CLASSICROOM, infos->room_list))
+	else if (!split_and_add_room(line, CLASSICROOM, infos))
 		return (0);
 	return (1);
 }
@@ -69,8 +78,3 @@ int lists_init(t_recurse *infos)
 	ft_memdel((void**)&line);
 	return (1);
 }
-/*
-static int	parser(t_recurse *infos)
-{
-
-}*/
