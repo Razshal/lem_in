@@ -6,13 +6,14 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/16 17:59:07 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/16 18:37:15 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
 SRC_PATH = src
 SRC_NAME = get_list.c \
+	   get_list2.c \
 	   lem_in.c \
 	   lem_lists.c \
 	   lists.c \
@@ -24,7 +25,7 @@ OBJ_PATH = obj
 CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
 LIBDIR = libft
-CC = clang
+CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 
 INC_PATH = include
@@ -36,11 +37,11 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -fsanitize=address -g3
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $< -fsanitize=address -g3
 
 $(LIBFT):
 	@make -C $(LIBDIR)

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 18:09:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:51:05 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 static int lem_init(int lem_amount, t_recurse *infos)
 {
-	int lem_nu;
-
-	lem_nu = 1;
 	if (lem_amount < 1)
 		return (0);
 	while (lem_amount > 0)
 	{
-		if (!add_lem(
-				lem_nu--, get_start_name(infos->room_list), infos->lem_list))
+		if (!add_lem(lem_amount--, NULL, infos->lem_list))
 			return (0);
 	}
 	return (1);
@@ -64,12 +60,14 @@ int lists_init(t_recurse *infos)
 {
 	char *line;
 
-	if ((line = NULL) || !(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
+	line = NULL;
+	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
 			|| !get_next_line(0, &line) || !lem_init(ft_atoi(line), infos))
 	{
 		ft_memdel((void**)&line);
 		return (0);
 	}
+
 	while (noleaks_get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))

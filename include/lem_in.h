@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 13:24:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:21:10 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # define CLASSICROOM -30
 # define INTMAX 2147483647
 # define FAILURE INTMAX
+
+//////////////// DEBUG ////////////////////
+#define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
+
+
+///////////////////////////////////////////
+
+
 
 typedef struct	s_room_list t_room_list;
 
