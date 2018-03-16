@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:36:19 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 18:49:06 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:55:31 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char		*get_start_name(t_room_list *room)
 	t_room_list *temp;
 
 	temp = room;
-	while (room && temp)
+	while (temp)
 	{
 		if (temp->type == START)
 			return (temp->name);
