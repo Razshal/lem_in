@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 16:32:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 17:51:00 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	char	**rooms;
 	int		res;
 
-	if (ft_count_words(line, ' ') != 3 || !ft_str_isdigit(line))
+	if (ft_count_words(line, ' ') != 3)
 		return (0);
 	rooms = ft_strsplit(line, ' ');
 	res = add_room(rooms[0], type, infos->room_list);
-	if (!res)
+	if (!res || !ft_str_isdigit(rooms[1]) || !ft_str_isdigit(rooms[2]))
+	{
 		ft_memdel_array((void***)rooms);
+		return (0);
+	}
 	if (res && rooms[1])
 		ft_memdel_array((void***)&rooms[1]);
 	return (res);
@@ -75,10 +78,7 @@ int lists_init(t_recurse *infos)
 	while (noleaks_get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))
-		{
-		BUGERROR;
 			return (0);
-		}
 	}
 	ft_memdel((void**)&line);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 15:50:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 18:23:20 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	add_room(char *room_name, int roomtype, t_room_list *rlist)
 {
 	t_room_list *rlist_local;
 
-	if (!rlist && !(rlist = new_room(room_name, roomtype)))
+	if (!rlist && !(rlist = new_room(room_name, roomtype)) && !printf("test"))
 		return (0);
 	if (!get_room(room_name, rlist))
 	{
