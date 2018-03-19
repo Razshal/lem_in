@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 18:08:35 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 13:17:30 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int main(void)
 	t_recurse *infos;
 
 	infos = NULL;
-	if (!lists_init(infos) || !moove_lems(infos))
+	if (!lists_init(infos))
+	{
 		ft_putstr("ERROR");
+		return (0);
+	}
+	if (!moove_lems(infos))
+		BUGERROR;
 }
