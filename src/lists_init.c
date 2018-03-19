@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 13:57:27 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:32:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ static int	check_and_add_the_right_data(char *line, t_recurse *infos)
 		return (0);
 	if (ft_strchr(line, '-') && !add_link(line, infos->room_list))
 		return (0);
-	else if (ft_strstr(line, "##end") && !ft_strstr(line, "##end")[5]
+	else if (ft_strstr(line, "##end") && ft_strstr(line, "##end")[5] == '\0'
 			&& (!noleaks_get_next_line(0, &line)
 			|| !split_and_add_room(line, END, infos)))
 		return (0);
-	else if (ft_strstr(line, "##start") && !(ft_strstr(line, "##start")[7]
+	else if (ft_strstr(line, "##start") && ft_strstr(line, "##start")[7] == '\0'
 			&& (!noleaks_get_next_line(0, &line)
-			|| !split_and_add_room(line, START, infos))))
+			|| !split_and_add_room(line, START, infos)))
 		return (0);
 	else if (!split_and_add_room(line, CLASSICROOM, infos))
 		return (0);
@@ -75,7 +75,10 @@ int lists_init(t_recurse *infos)
 	while (noleaks_get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))
+		{
+		BUGERROR;
 			return (0);
+		}
 	}
 	ft_memdel((void**)&line);
 	return (1);

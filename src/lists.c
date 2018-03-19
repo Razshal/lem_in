@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 17:17:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 15:50:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_room_list *new_room(char *room_name, int room_type)
 {
 	t_room_list *rlist;
-
+	BUGERROR;
 	if (!(rlist = (t_room_list*)malloc(sizeof(t_room_list) * 1)))
 		return (NULL);
 	rlist->name = room_name;

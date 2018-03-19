@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/15 16:17:18 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:33:39 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ t_room_list *get_room(char *room_name, t_room_list *rlist)
 	t_room_list *current;
 
 	current = rlist;
-	while (current)
+	while (current && room_name && rlist)
 	{
-		if (!ft_strcmp(current->name, room_name))
+		if (current->name && !ft_strcmp(current->name, room_name))
 			return (current);
 	}
 	return (NULL);
@@ -74,4 +74,3 @@ t_room_links *get_last_item_link(t_room_links *rlink)
 		local_rlink = local_rlink->next;
 	return (local_rlink);
 }
-
