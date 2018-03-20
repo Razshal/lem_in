@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 16:30:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:06:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ t_room_links *get_lroom_name(char *name, int rlink_num, t_room_list *rlist)
 	count = 0;
 	while (link)
 	{
-		if (count == rlink_num++)
+		if (count == rlink_num)
 			return (link);
 		link = link->next;
+		count++;
 	}
 	return (NULL);
 }
