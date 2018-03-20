@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 18:36:19 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 18:55:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:10:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-char		*get_start_name(t_room_list *room)
+char	*get_start_name(t_room_list *room)
 {
 	t_room_list *temp;
 

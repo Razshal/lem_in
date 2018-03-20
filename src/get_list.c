@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 17:46:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 15:57:02 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ t_room_list *get_room(char *room_name, t_room_list *rlist)
 {
 	t_room_list *current;
 
-	printf("test:%s\n", room_name);
 	current = rlist;
-	while (current && room_name && rlist)
+	while (current && room_name && rlist && current->name)
 	{
-		if (current->name && !ft_strcmp(current->name, room_name))
+		if (!ft_strcmp(current->name, room_name))
 			return (current);
 	}
 	return (NULL);
