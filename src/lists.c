@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 18:23:20 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:34:41 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_room_list *new_room(char *room_name, int room_type)
 {
 	t_room_list *rlist;
-	BUGERROR;
+
 	if (!(rlist = (t_room_list*)malloc(sizeof(t_room_list) * 1)))
 		return (NULL);
 	rlist->name = room_name;
@@ -40,16 +40,13 @@ int	add_room(char *room_name, int roomtype, t_room_list *rlist)
 {
 	t_room_list *rlist_local;
 
-	if (!rlist && !(rlist = new_room(room_name, roomtype)) && !printf("test"))
+	if (!rlist && !(rlist = new_room(room_name, roomtype)))
 		return (0);
 	if (!get_room(room_name, rlist))
 	{
 		rlist_local = (new_room(room_name, roomtype)->next = rlist);
 		rlist = rlist_local;
 	}
-	if (get_room(room_name, rlist)->type == CLASSICROOM
-			&& roomtype != CLASSICROOM)
-		get_room(room_name, rlist)->type = roomtype;
 	return (1);
 }
 
@@ -79,5 +76,6 @@ int			add_link(char *line, t_room_list *rlist)
 		return (0);
 	if (!add_lroom(new_room_link(get_room(room1, rlist)), links))
 		return (0);
+	ft_memdel_array((void***)&rooms);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 15:57:02 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 16:30:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_room_list *get_room(char *room_name, t_room_list *rlist)
 	t_room_list *current;
 
 	current = rlist;
+	ft_printf("{GREEN}%s\n{EOC}", room_name);
 	while (current && room_name && rlist && current->name)
 	{
 		if (!ft_strcmp(current->name, room_name))
