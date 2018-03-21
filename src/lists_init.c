@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/21 15:23:07 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:08:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	if (ft_count_words(line, ' ') != 3)
 		return (0);
 	rooms = ft_strsplit(line, ' ');
-	res = add_room(rooms[0], type, infos->room_list);
+	res = add_room(ft_strdup(rooms[0]), type, infos->room_list);
 	if (!res || !ft_str_isdigit(rooms[1]) || !ft_str_isdigit(rooms[2]))
 	{
 		delete_array(rooms);
 		return (0);
 	}
-	if (res && rooms[1])
-		delete_array(&rooms[1]);
 	return (res);
 }
 static int	check_and_add_the_right_data(char *line, t_recurse *infos)
@@ -48,11 +46,11 @@ static int	check_and_add_the_right_data(char *line, t_recurse *infos)
 		return (0);
 	if (ft_strchr(line, '-') && !add_link(line, infos->room_list))
 		return (0);
-	else if (ft_strstr(line, "##end") && ft_strstr(line, "##end")[5] == '\0'
+	else if (ft_strstr(line, "##end") && line[5] == '\0'
 			&& (!noleaks_get_next_line(0, &line)
 			|| !split_and_add_room(line, END, infos)))
 		return (0);
-	else if (ft_strstr(line, "##start") && ft_strstr(line, "##start")[7] == '\0'
+	else if (ft_strstr(line, "##start") && line[7] == '\0'
 			&& (!noleaks_get_next_line(0, &line)
 			|| !split_and_add_room(line, START, infos)))
 		return (0);
