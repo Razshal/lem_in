@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/21 17:08:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:10:16 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,13 @@ int lists_init(t_recurse *infos)
 	infos->room_list = NULL;
 	if (!lem_init(ft_atoi(line), infos))
 		return (0);
-	while (noleaks_get_next_line(0, &line))
+	while (get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))
+		{
+			ft_memdel((void**)&line);
 			return (0);
+		}
 	}
 	ft_memdel((void**)&line);
 	return (1);
