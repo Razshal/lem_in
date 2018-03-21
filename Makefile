@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/03/16 18:37:15 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/03/21 15:19:53 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC_NAME = get_list.c \
 	   lists.c \
 	   searching.c \
 	   lem_checks.c \
-	   lists_init.c
+	   lists_init.c \
+	   del_list.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
 CPPFLAGS = -Iinclude

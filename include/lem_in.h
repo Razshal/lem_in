@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 18:21:10 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:19:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
-
+#include <stdio.h>
 
 ///////////////////////////////////////////
-
-
 
 typedef struct	s_room_list t_room_list;
 
@@ -71,5 +69,6 @@ int				add_room(char *room_name, int room_type, t_room_list *rlist);
 int				add_link(char *line, t_room_list *rlist);
 int				is_end_room(char *room_name, t_room_list *list);
 int				lists_init(t_recurse *infos);
+void			delete_array(char **array);
 
 #endif

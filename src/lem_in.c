@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 13:17:30 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:33:26 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 static int	all_lems_in_end(t_recurse *infos)
 {
-	int			are_they;
 	t_lem_list	*local_lem;
 
-	are_they = 1;
 	local_lem = infos->lem_list;
 	while (local_lem)
 	{
 		if (!is_end_room(local_lem->room, infos->room_list))
-			are_they = 0;
+			return (0);
 		local_lem = local_lem->next;
 	}
-	return (are_they);
+	return (1);
 }
 
 static int	moove_lems(t_recurse *infos)

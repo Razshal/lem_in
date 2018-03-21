@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 16:36:15 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:23:07 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	res = add_room(rooms[0], type, infos->room_list);
 	if (!res || !ft_str_isdigit(rooms[1]) || !ft_str_isdigit(rooms[2]))
 	{
-		ft_memdel_array((void***)rooms);
+		delete_array(rooms);
 		return (0);
 	}
 	if (res && rooms[1])
-		ft_memdel_array((void***)&rooms[1]);
+		delete_array(&rooms[1]);
 	return (res);
 }
 static int	check_and_add_the_right_data(char *line, t_recurse *infos)

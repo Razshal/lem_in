@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 16:34:41 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:23:56 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int			add_link(char *line, t_room_list *rlist)
 		return (0);
 	if (!add_lroom(new_room_link(get_room(room1, rlist)), links))
 		return (0);
-	ft_memdel_array((void***)&rooms);
+	delete_array(rooms);
 	return (1);
 }

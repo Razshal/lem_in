@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   del_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 19:21:34 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/21 15:20:07 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/03/21 15:22:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../include/libft.h"
 
-void	ft_memdel(void **ap)
+void	delete_array(char **array)
 {
-	if (ap)
-	{
-		free(*ap);
-		*ap = NULL;
-	}
+	int count;
+
+	count = 0;
+	if (array)
+		while (array[count])
+			ft_memdel((void**)&array[count++]);
+	ft_memdel((void**)array);
 }
