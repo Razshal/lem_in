@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 17:08:45 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/06 18:05:52 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	char	**rooms;
 	int		res;
 
+	printf("%s\n", line);
 	if (ft_count_words(line, ' ') != 3)
 		return (0);
 	rooms = ft_strsplit(line, ' ');
@@ -40,20 +41,23 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	}
 	return (res);
 }
+//TODO repair this function, no rooms are created
 static int	check_and_add_the_right_data(char *line, t_recurse *infos)
 {
+printf("%s\n", line);
 	if (!line)
 		return (0);
-	if (ft_strchr(line, '-') && !add_link(line, infos->room_list))
+	else if (!infos->room_list
+			|| (ft_strchr(line, '-') && !add_link(line, infos->room_list)))
 		return (0);
-	else if (ft_strstr(line, "##end") && line[5] == '\0'
-			&& (!noleaks_get_next_line(0, &line)
+	else if (!ft_strcmp(line, "##end") && (!noleaks_get_next_line(0, &line)
 			|| !split_and_add_room(line, END, infos)))
 		return (0);
-	else if (ft_strstr(line, "##start") && line[7] == '\0'
-			&& (!noleaks_get_next_line(0, &line)
+	else if (!ft_strcmp(line, "##start") && (!noleaks_get_next_line(0, &line)
 			|| !split_and_add_room(line, START, infos)))
 		return (0);
+	else if (line[0] == '#' && line[1] != '#')
+		return (1);
 	else if (!split_and_add_room(line, CLASSICROOM, infos))
 		return (0);
 	return (1);
@@ -74,6 +78,7 @@ int lists_init(t_recurse *infos)
 	infos->room_list = NULL;
 	if (!lem_init(ft_atoi(line), infos))
 		return (0);
+	print_struct(infos);
 	while (get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))
