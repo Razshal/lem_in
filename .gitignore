@@ -11,3 +11,4 @@ main.c
 lem_in
 *.trace
 out
+.DS_Store
