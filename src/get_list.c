@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 17:18:43 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:27:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_room_list *get_room(char *room_name, t_room_list *rlist)
 	{
 		if (!ft_strcmp(current->name, room_name))
 			return (current);
+		current = current->next;
 	}
 	return (NULL);
 }

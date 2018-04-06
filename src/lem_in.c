@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/20 17:33:26 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/06 17:05:11 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ int main(void)
 	}
 	if (!moove_lems(infos))
 		BUGERROR;
+	print_struct(infos);
 }
