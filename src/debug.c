@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 18:37:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/07 12:39:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,21 @@ void	print_struct(t_recurse *recurse)
 	{
 		printf("L-%d\n", lem_list->lem); FLUSH;
 		printf ("%s\n", lem_list->room); FLUSH;
+		lem_list = lem_list->next;
 	}
 //	if (next_room)
 //		printf("Le resultat de la recherche de room est %s\n", next_room->name);
+}
+
+void print_lem_struct(t_lem_list *list)
+{
+	t_lem_list *lem_list = list;
+	if (!list)
+		ERROR("lem_list not init");
+	while (lem_list)
+	{
+		printf("L-%d\n", lem_list->lem); FLUSH;
+		printf ("%s\n", lem_list->room); FLUSH;
+		lem_list = lem_list->next;
+	}
 }

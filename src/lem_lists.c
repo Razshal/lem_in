@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:57:38 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 12:31:57 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/07 14:25:24 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,14 @@ int			add_lem(int lem_num, char *room_name, t_lem_list *llist)
 
 	if (!llist && !(llist = new_lem(lem_num, room_name)))
 		return (0);
-	llist_local = llist;
 	if (!get_lem(lem_num, llist))
-		new_lem(lem_num, room_name)->next = llist;
+	{
+		llist_local = new_lem(lem_num, room_name);
+		if (!llist_local)
+			return (0);
+		llist_local->next = llist;
+		llist = llist_local;
+	}
+
 	return (1);
 }

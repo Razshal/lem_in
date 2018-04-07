@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 17:04:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/07 12:39:12 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ void			delete_array(char **array);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
+#define ERROR(message) ft_printf("{RED}%s{EOC}\n", message)
 #include <stdio.h>
 void print_struct(t_recurse *recurse);
-
+void print_lem_struct(t_lem_list *list);
 ///////////////////////////////////////////
 
 #endif

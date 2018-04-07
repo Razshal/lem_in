@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 18:05:52 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/07 13:39:55 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static int lem_init(int lem_amount, t_recurse *infos)
 		if (!add_lem(lem_amount--, NULL, infos->lem_list))
 			return (0);
 	}
+	print_lem_struct(infos->lem_list);
+
+	printf("lem_num %d\n", infos->lem_list->lem);
 	return (1);
 }
 
@@ -76,9 +79,8 @@ int lists_init(t_recurse *infos)
 	}
 	infos->lem_list = NULL;
 	infos->room_list = NULL;
-	if (!lem_init(ft_atoi(line), infos))
+	if (!line || !lem_init(ft_atoi(line), infos))
 		return (0);
-	print_struct(infos);
 	while (get_next_line(0, &line))
 	{
 		if (!check_and_add_the_right_data(line, infos))
