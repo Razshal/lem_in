@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 17:44:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 13:01:12 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ t_room_links *new_room_link(t_room_list *room)
 	return (rlink);
 }
 
-int	add_room(char *room_name, int roomtype, t_room_list *rlist)
+int	add_room(char *room_name, int roomtype, t_room_list **rlist)
 {
 	t_room_list *rlist_local;
 
-	if (!rlist && !(rlist = new_room(room_name, roomtype)))
+	if (!*rlist && !(*rlist = new_room(room_name, roomtype)))
 		return (0);
-	if (!get_room(room_name, rlist))
+	if (!get_room(room_name, *rlist))
 	{
-		rlist_local = (new_room(room_name, roomtype)->next = rlist);
-		rlist = rlist_local;
+		rlist_local = (new_room(room_name, roomtype)->next = *rlist);
+		*rlist = rlist_local;
 	}
 	return (1);
 }
