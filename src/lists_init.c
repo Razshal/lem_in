@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:09:26 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:36:52 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	lem_init(int lem_amount, t_recurse *infos)
 	return (infos->lem_list != NULL);
 }
 
-//TODO check if free frees 2dim arrays
 static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
 	char	**rooms;
@@ -80,7 +79,6 @@ int			lists_init(t_recurse **infos)
 	{
 		if (!parse_line(line, *infos))
 		{
-ERROR("parser rejected line or failed");
 			ft_memdel((void**)&line);
 			return (0);
 		}

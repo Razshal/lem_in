@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:32:02 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:37:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	print_struct(t_recurse *recurse)
 			INFO("CLASSICROOM");
 
 		ft_printf("{BLUE}Number of links:%d{EOC}\n", rlist->number_of_links);
+
 		INFO("Linked to :");
 		while (linked_rooms)
 		{
@@ -66,7 +67,4 @@ void	print_struct(t_recurse *recurse)
 		ft_putchar('\n');
 	}
 	print_lem_struct(lem_list);
-
-//	if (next_room)
-//		printf("Le resultat de la recherche de room est %s\n", next_room->name);
 }
