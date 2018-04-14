@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/07 12:39:12 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 12:33:41 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_room_links	*get_lroom_name(char *name, int link_num, t_room_list *rlist);
 t_room_links	*get_lroom_pos(t_room_list *room, int link_num);
 t_room_links	*get_last_item_link(t_room_links *rlink);
 t_lem_list		*get_lem(int lem_num, t_lem_list *llist);
-int				add_lem(int lem_num, char *room_name, t_lem_list *llist);
+int				add_lem(int lem_num, char *room_name, t_lem_list **llist);
 char			*get_start_name(t_room_list *room);
 int				add_room(char *room_name, int room_type, t_room_list *rlist);
 int				add_link(char *line, t_room_list *rlist);
@@ -70,9 +70,10 @@ void			delete_array(char **array);
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
 #define ERROR(message) ft_printf("{RED}%s{EOC}\n", message)
+#define SUCCESSM(message) ft_printf("{GREEN}%s{EOC}\n", message)
 #include <stdio.h>
 void print_struct(t_recurse *recurse);
-void print_lem_struct(t_lem_list *list);
+int print_lem_struct(t_lem_list *list);
 ///////////////////////////////////////////
 
 #endif

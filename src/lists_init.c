@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/07 13:39:55 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 12:35:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ static int lem_init(int lem_amount, t_recurse *infos)
 		return (0);
 	while (lem_amount > 0)
 	{
-		if (!add_lem(lem_amount--, NULL, infos->lem_list))
+		if (!add_lem(lem_amount--, NULL, &(infos->lem_list)))
 			return (0);
 	}
-	print_lem_struct(infos->lem_list);
-
-	printf("lem_num %d\n", infos->lem_list->lem);
-	return (1);
+	return (infos->lem_list != NULL);
 }
 
 static int	split_and_add_room(char *line, int type, t_recurse *infos)
@@ -32,7 +29,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	char	**rooms;
 	int		res;
 
-	printf("%s\n", line);
+printf("%s\n", line);
 	if (ft_count_words(line, ' ') != 3)
 		return (0);
 	rooms = ft_strsplit(line, ' ');
