@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 13:41:14 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 13:48:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ printf("%s\n", line);
 		else if (ft_strcmp(line, "##start")
 				&& noleaks_get_next_line(0, &line) && split_and_add_room(line, START, infos))
 			return (1);
+ERROR("bad ## instruction");
 		return (0);
 	}
 	else if (!split_and_add_room(line, CLASSICROOM, infos))
+	{
+ERROR("failed classic room add");
 		return (0);
+	}
 	return (1);
 }
 
