@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:24:48 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:28:48 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_room_list		*new_room(char *room_name, int room_type)
 		return (NULL);
 	rlist->name = room_name;
 	rlist->type = room_type;
+	rlist->number_of_links = 0;
 	rlist->l_rooms = NULL;
 	rlist->next = NULL;
 	return (rlist);
@@ -35,7 +36,6 @@ static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 		return (NULL);
 	rlink->room = room;
 	rlink->next = NULL;
-ft_printf("{YELLOW}Link with:%s{EOC}\n", rlink->room->name);
 	return (rlink);
 }
 
@@ -63,6 +63,7 @@ static int		add_lroom(char *room_name, t_room_links *new_link, t_recurse *infos)
 		return (0);
 	new_link->next = room->l_rooms;
 	room->l_rooms = new_link;
+	room->number_of_links++;
 	return (1);
 }
 //TODO check if free frees 2dim arrays

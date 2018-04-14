@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:01:27 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:28:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ struct	s_room_list
 {
 	char				*name;
 	int					type;
+	int					number_of_links;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
 };

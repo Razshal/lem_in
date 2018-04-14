@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 17:39:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:06:57 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:26:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_room_links *get_lroom_pos(t_room_list *room, int link_num)
 	return (NULL);
 }
 /*
-t_room_links *get_lroom_name(char *name, int rlink_num, t_recurse *infos)
+t_room_links *get_lroom_by_name(char *name, int rlink_num, t_recurse *infos)
 {
 	t_room_links	*link;
 	int				count;
