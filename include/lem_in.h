@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:26:44 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:41:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int				add_lem(int lem_num, char *room_name, t_recurse *infos);
 char			*get_start_name(t_room_list *room);
 int				add_room(char *room_name, int room_type, t_recurse *infos);
 int				add_link(char *line, t_room_list *rlist);
-int				is_end_room(char *room_name, t_room_list *list);
+int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
 

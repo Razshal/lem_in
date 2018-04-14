@@ -6,19 +6,19 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/16 17:21:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:42:56 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 //TODO : find a way to take another path if a lem is in the next room
 
-int			is_end_room(char *name, t_room_list *list)
+int			is_end_room(char *name, t_recurse *infos)
 {
 	t_room_list *current;
 
-	current = list;
-	while (current)
+	current = infos->room_list;
+	while (current && current->name && name)
 	{
 		if (!ft_strcmp(current->name, name) && current->type == END)
 			return (1);
