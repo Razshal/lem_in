@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 13:48:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:05:54 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,38 +24,46 @@ static int lem_init(int lem_amount, t_recurse *infos)
 	return (infos->lem_list != NULL);
 }
 
+//TODO check if free frees 2dim arrays
 static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
 	char	**rooms;
 
-printf("%s\n", line);
 	if (ft_count_words(line, ' ') != 3)
 		return (0);
 	rooms = ft_strsplit(line, ' ');
 	if (!ft_str_isdigit(rooms[1]) || !ft_str_isdigit(rooms[2]))
 	{
-		delete_array(rooms);
+		free(rooms);
 		return (0);
 	}
 	return (add_room(ft_strdup(rooms[0]), type, &(infos->room_list)));
 }
 
-static int	check_and_add_the_right_data(char *line, t_recurse *infos)
+static int	parse_line(char *line, t_recurse *infos)
 {
-printf("%s\n", line);
-	if (!line)
+//printf("%s\n", line);
+	if (!line || line[1] == 'L')
 		return (0);
 	else if (line[0] == '#' && line[1] != '#')
 		return (1);
-	else if (!infos->room_list && ft_strchr(line, '-') && !add_link(line, infos->room_list))
-		return (0);
+	else if (ft_strchr(line, '-'))
+	{
+		if (!add_link(line, infos->room_list))
+		{
+			ERROR("add link failed");
+			return (0);
+		}
+		else
+			return (1);
+	}
 	else if (line[0] == '#' && line[1] == '#')
 	{
-		if (ft_strcmp(line, "##end")
-				&& noleaks_get_next_line(0, &line) && split_and_add_room(line, END, infos))
+		if (ft_strcmp(line, "##end") && noleaks_get_next_line(0, &line)
+				&& split_and_add_room(line, END, infos))
 			return (1);
-		else if (ft_strcmp(line, "##start")
-				&& noleaks_get_next_line(0, &line) && split_and_add_room(line, START, infos))
+		else if (ft_strcmp(line, "##start") && noleaks_get_next_line(0, &line)
+				&& split_and_add_room(line, START, infos))
 			return (1);
 ERROR("bad ## instruction");
 		return (0);
@@ -83,9 +91,11 @@ int lists_init(t_recurse *infos)
 	infos->room_list = NULL;
 	if (!line || !lem_init(ft_atoi(line), infos))
 		return (0);
+	print_lem_struct(infos->lem_list);
+
 	while (get_next_line(0, &line))
 	{
-		if (!check_and_add_the_right_data(line, infos))
+		if (!parse_line(line, infos))
 		{
 ERROR("parser rejected line or failed");
 			ft_memdel((void**)&line);

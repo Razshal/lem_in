@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:57:38 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 12:31:55 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:10:07 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ t_lem_list	*get_lem(int lem_num, t_lem_list *llist)
 
 	lem = llist;
 	while (lem && lem->lem != lem_num)
-	{
-		if (lem->lem == lem_num)
-			return (lem);
 		lem = lem->next;
-	}
+	if (lem && lem->lem == lem_num)
+		return (lem);
 	return (NULL);
 }
 

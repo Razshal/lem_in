@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 13:01:12 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 16:24:27 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,45 +50,40 @@ int	add_room(char *room_name, int roomtype, t_room_list **rlist)
 	return (1);
 }
 
-static int	add_lroom(t_room_links *new, t_room_links *old)
+static int	add_lroom(t_room_links *new, t_room_links **old)
 {
 	if (!new)
 		return (0);
-	new->next = old;
-	old = new;
+	new->next = *old;
+	*old = new;
 	return (1);
 }
-
+//TODO check if free frees 2dim arrays
 int			add_link(char *line, t_room_list *rlist)
 {
 	char			**rooms;
 	char			*room1;
 	char			*room2;
 	t_room_links	*links;
+	t_room_links	*links2;
 
 	if (!(ft_count_words(line, '-') == 2))
 		return (0);
 	rooms = ft_strsplit(line, '-');
 	room1 = rooms[0];
 	room2 = rooms[1];
-	if (get_room(room1, rlist))
-		links = get_room(room1, rlist)->l_rooms;
-	else
+INFO(room1); INFO(room2);
+	if (get_room(room1, rlist) && get_room(room2, rlist))
 	{
-		if (get_room(room1, rlist) == NULL)
-			printf("%s, %s\n", room1, room2);
-		while (rlist)
+		links = get_room(room1, rlist)->l_rooms;
+		links2 = get_room(room2, rlist)->l_rooms;
+		if (add_lroom(new_room_link(get_room(room2, rlist)), &links)
+				&& add_lroom(new_room_link(get_room(room1, rlist)), &links2))
 		{
-			printf("%s\n", rlist->name);
-			rlist = rlist->next;
+			free(rooms);
+			return (1);
 		}
-		printf("%s", rlist->name);
-		return (0);
 	}
-	if (!add_lroom(new_room_link(get_room(room2, rlist)), links))
-		return (0);
-	if (!add_lroom(new_room_link(get_room(room1, rlist)), links))
-		return (0);
-	delete_array(rooms);
-	return (1);
+	free(rooms);
+	return (0);
 }

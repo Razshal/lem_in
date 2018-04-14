@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 12:34:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 16:25:17 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int print_lem_struct(t_lem_list *list)
 	}
 	while (lem_list)
 	{
-		printf("L-%d\n", lem_list->lem); FLUSH;
-		printf ("%s\n", lem_list->room); FLUSH;
+		ft_printf("{BLUE}L-%d{EOC}\n", lem_list->lem);
+		ft_printf ("{BLUE}Room:%s{EOC}\n\n", lem_list->room);
 		lem_list = lem_list->next;
 	}
 	return (1);
@@ -35,24 +35,36 @@ void	print_struct(t_recurse *recurse)
 	t_room_list *rlist;
 	t_lem_list *lem_list;
 	t_room_list	*next_room;
+	t_room_links *linked_rooms;
 
-	rlist = recurse->room_list;
-	lem_list = recurse->lem_list;
-	next_room = recurse->next_room;
+	if (!(rlist = recurse->room_list)
+		|| !(lem_list = recurse->lem_list)
+		|| !(next_room = recurse->next_room))
+	{
+		ERROR("Cannot access one of the list elements");
+		return ;
+	}
 	while (rlist)
 	{
-		printf("%s\n", rlist->name);
+		linked_rooms = rlist->l_rooms;
+		ft_printf("{BLUE}%s{EOC}\n", rlist->name);
 		if (rlist->type == START)
 		{
-			printf("START\n"); FLUSH;
+			INFO("START");
 		}
 		else if (rlist->type == END)
 		{
-			printf("END\n"); FLUSH;
+			INFO("END\n");
 		}
 		else if (rlist->type == CLASSICROOM)
 		{
-			printf("CLASSICROOM\n"); FLUSH;
+			INFO("CLASSICROOM");
+		}
+		INFO("Linked to :");
+		while (linked_rooms)
+		{
+			ft_printf("\t -{BLUE}%s{EOC}\n", linked_rooms->room->name);
+			linked_rooms = linked_rooms->next;
 		}
 		rlist = rlist->next;
 	}
