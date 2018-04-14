@@ -6,12 +6,12 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:41:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:44:17 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
-
+/*
 static int	all_lems_in_end(t_recurse *infos)
 {
 	t_lem_list	*local_lem;
@@ -38,7 +38,7 @@ static int	moove_lems(t_recurse *infos)
 			ft_printf("test");
 	}
 	return (1);
-}
+}*/
 
 int main(void)
 {
@@ -52,7 +52,7 @@ int main(void)
 		ft_putstr("ERROR");
 		return (0);
 	}
-	if (!moove_lems(infos))
-		BUGERROR;
+//	if (!moove_lems(infos))
+//		BUGERROR;
 	print_struct(infos);
 }

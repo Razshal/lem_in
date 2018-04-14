@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:31:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:09:26 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,14 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 
 static int	parse_line(char *line, t_recurse *infos)
 {
-//printf("%s\n", line);
 	if (!line || line[1] == 'L')
 		return (0);
 	else if (line[0] == '#' && line[1] != '#')
 		return (1);
 	else if (ft_strchr(line, '-'))
 	{
-		if (!add_link(line, infos->room_list))
-		{
-ERROR("add link failed");
+		if (!add_link(line, infos))
 			return (0);
-		}
-		else
-			return (1);
 	}
 	else if (line[0] == '#' && line[1] == '#')
 	{
@@ -65,14 +59,10 @@ ERROR("add link failed");
 		else if (ft_strcmp(line, "##start") && noleaks_get_next_line(0, &line)
 				&& split_and_add_room(line, START, infos))
 			return (1);
-ERROR("bad ## instruction");
 		return (0);
 	}
 	else if (!split_and_add_room(line, CLASSICROOM, infos))
-	{
-ERROR("failed classic room add");
 		return (0);
-	}
 	return (1);
 }
 

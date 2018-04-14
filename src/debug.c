@@ -6,12 +6,11 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 16:25:17 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:48:05 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
-#define FLUSH fflush(stdout)
 
 int print_lem_struct(t_lem_list *list)
 {
@@ -47,14 +46,14 @@ void	print_struct(t_recurse *recurse)
 	while (rlist)
 	{
 		linked_rooms = rlist->l_rooms;
-		ft_printf("{BLUE}%s{EOC}\n", rlist->name);
+		ft_printf("{BLUE}Room:%s{EOC}\n", rlist->name);
 		if (rlist->type == START)
 		{
 			INFO("START");
 		}
 		else if (rlist->type == END)
 		{
-			INFO("END\n");
+			INFO("END");
 		}
 		else if (rlist->type == CLASSICROOM)
 		{
@@ -67,6 +66,7 @@ void	print_struct(t_recurse *recurse)
 			linked_rooms = linked_rooms->next;
 		}
 		rlist = rlist->next;
+		ft_putchar('\n');
 	}
 	print_lem_struct(lem_list);
 

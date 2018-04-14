@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:38:20 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:24:48 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ t_room_list		*new_room(char *room_name, int room_type)
 	return (rlist);
 }
 
-t_room_links	*new_room_link(t_room_list *room)
+static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 {
 	t_room_links *rlink;
+	t_room_list *room;
 
-	if (!(rlink = (t_room_links*)malloc(sizeof(t_room_links) * 1)))
+	if (!(rlink = (t_room_links*)malloc(sizeof(t_room_links) * 1)) ||
+			!(room = get_room(room_name, infos)))
 		return (NULL);
 	rlink->room = room;
 	rlink->next = NULL;
+ft_printf("{YELLOW}Link with:%s{EOC}\n", rlink->room->name);
 	return (rlink);
 }
 
@@ -43,7 +46,7 @@ int				add_room(char *room_name, int roomtype, t_recurse *infos)
 	if (!infos->room_list
 			&& !(infos->room_list = new_room(room_name, roomtype)))
 		return (0);
-	if (!get_room(room_name, infos->room_list))
+	if (!get_room(room_name, infos))
 	{
 		rlist_local = new_room(room_name, roomtype);
 		rlist_local->next = infos->room_list;
@@ -52,38 +55,32 @@ int				add_room(char *room_name, int roomtype, t_recurse *infos)
 	return (1);
 }
 
-static int		add_lroom(t_room_links *new, t_room_links **old)
+static int		add_lroom(char *room_name, t_room_links *new_link, t_recurse *infos)
 {
-	if (!new)
+	t_room_list *room;
+
+	if (!(room = get_room(room_name, infos)))
 		return (0);
-	new->next = *old;
-	*old = new;
+	new_link->next = room->l_rooms;
+	room->l_rooms = new_link;
 	return (1);
 }
 //TODO check if free frees 2dim arrays
-int				add_link(char *line, t_room_list *rlist)
+int				add_link(char *line, t_recurse *infos)
 {
 	char			**rooms;
 	char			*room1;
 	char			*room2;
-	t_room_links	*links;
-	t_room_links	*links2;
 
 	if (!(ft_count_words(line, '-') == 2))
 		return (0);
 	rooms = ft_strsplit(line, '-');
 	room1 = rooms[0];
 	room2 = rooms[1];
-	if (!get_room(room1, rlist))
-		ERROR("NO ROOM 1");
-	if (!get_room(room2, rlist))
-		ERROR("NO ROOM 2");
-	if (get_room(room1, rlist) && get_room(room2, rlist))
+	if (get_room(room1, infos) && get_room(room2, infos))
 	{
-		links = get_room(room1, rlist)->l_rooms;
-		links2 = get_room(room2, rlist)->l_rooms;
-		if (add_lroom(new_room_link(get_room(room2, rlist)), &links)
-				&& add_lroom(new_room_link(get_room(room1, rlist)), &links2))
+		if (add_lroom(room1, new_room_link(room2, infos), infos)
+				&& add_lroom(room2, new_room_link(room1, infos), infos))
 		{
 			free(rooms);
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:41:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 19:01:27 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct	s_recurse
 	t_room_list	*next_room;
 }				t_recurse;
 
-t_room_list		*get_room(char *name, t_room_list *rlist);
+t_room_list		*get_room(char *name, t_recurse *infos);
 t_room_list		*get_last_item(t_room_list *rlist);
 t_room_links	*get_lroom_name(char *name, int link_num, t_room_list *rlist);
 t_room_links	*get_lroom_pos(t_room_list *room, int link_num);
@@ -60,7 +60,7 @@ t_lem_list		*get_lem(int lem_num, t_recurse *infos);
 int				add_lem(int lem_num, char *room_name, t_recurse *infos);
 char			*get_start_name(t_room_list *room);
 int				add_room(char *room_name, int room_type, t_recurse *infos);
-int				add_link(char *line, t_room_list *rlist);
+int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
