@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:05:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:19:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int lem_init(int lem_amount, t_recurse *infos)
 		return (0);
 	while (lem_amount > 0)
 	{
-		if (!add_lem(lem_amount--, NULL, &(infos->lem_list)))
+		if (!add_lem(lem_amount--, NULL, infos))
 			return (0);
 	}
 	return (infos->lem_list != NULL);

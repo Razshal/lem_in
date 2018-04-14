@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:57:38 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:10:07 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:23:01 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,32 @@ static t_lem_list	*new_lem(int lem_num, char *room_name)
 	return (llist);
 }
 
-t_lem_list	*get_lem(int lem_num, t_lem_list *llist)
+t_lem_list			*get_lem(int lem_num, t_recurse *infos)
 {
 	t_lem_list *lem;
 
-	lem = llist;
-	while (lem && lem->lem != lem_num)
+	lem = infos->lem_list;
+	while (lem)
+	{
+		if (lem && lem->lem == lem_num)
+			return (lem);
 		lem = lem->next;
-	if (lem && lem->lem == lem_num)
-		return (lem);
+	}
 	return (NULL);
 }
 
-int			add_lem(int lem_num, char *room_name, t_lem_list **llist)
+int					add_lem(int lem_num, char *room_name, t_recurse *infos)
 {
 	t_lem_list *llist_local;
 
-	if (!*llist && !(*llist = new_lem(lem_num, room_name)))
+	if (!infos->lem_list && !(infos->lem_list = new_lem(lem_num, room_name)))
 		return (0);
-	if (!get_lem(lem_num, *llist))
+	if (!get_lem(lem_num, infos))
 	{
 		if (!(llist_local = new_lem(lem_num, room_name)))
 			return (0);
-		llist_local->next = *llist;
-		*llist = llist_local;
+		llist_local->next = infos->lem_list;
+		infos->lem_list = llist_local;
 	}
 	return (1);
 }
