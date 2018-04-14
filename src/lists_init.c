@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:19:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:39:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,19 @@ ERROR("failed classic room add");
 	return (1);
 }
 
-int lists_init(t_recurse *infos)
+int lists_init(t_recurse **infos)
 {
 	char *line;
 
-	line = NULL;
-	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
-			|| !get_next_line(0, &line))
-	{
-		ft_memdel((void**)&line);
+	(*infos)->lem_list = NULL;
+	(*infos)->room_list = NULL;
+	if (!get_next_line(0, &line))
 		return (0);
-	}
-	infos->lem_list = NULL;
-	infos->room_list = NULL;
-	if (!line || !lem_init(ft_atoi(line), infos))
+	if (!line || !lem_init(ft_atoi(line), *infos))
 		return (0);
-	print_lem_struct(infos->lem_list);
-
 	while (get_next_line(0, &line))
 	{
-		if (!parse_line(line, infos))
+		if (!parse_line(line, *infos))
 		{
 ERROR("parser rejected line or failed");
 			ft_memdel((void**)&line);

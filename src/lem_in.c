@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 16:26:36 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 17:38:38 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	moove_lems(t_recurse *infos)
 	local_lem = infos->lem_list;
 	while (!all_lems_in_end(infos))
 	{
-		if (get_lem(1, local_lem))
+		if (get_lem(1, infos))
 			ft_printf("test");
 	}
 	return (1);
@@ -44,12 +44,11 @@ int main(void)
 {
 	t_recurse *infos;
 
-	infos = NULL;
-	if (!lists_init(infos))
+	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1)))
+		return (0);
+	if (!lists_init(&infos))
 	{
-print_lem_struct(infos->lem_list);
-
-
+		print_lem_struct(infos->lem_list);
 		ft_putstr("ERROR");
 		return (0);
 	}
