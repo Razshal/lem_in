@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 17:39:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/06 17:39:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:19:35 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_room_list *get_room(char *room_name, t_room_list *rlist)
 	t_room_list *current;
 
 	current = rlist;
-	while (current && room_name && rlist && current->name)
+	while (room_name && rlist && current && current->name)
 	{
+ft_printf("%s ? %s\n", room_name, current->name);
 		if (!ft_strcmp(current->name, room_name))
 			return (current);
 		current = current->next;

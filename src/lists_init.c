@@ -6,13 +6,13 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:39:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 18:31:28 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-static int lem_init(int lem_amount, t_recurse *infos)
+static int	lem_init(int lem_amount, t_recurse *infos)
 {
 	if (lem_amount < 1)
 		return (0);
@@ -37,7 +37,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 		free(rooms);
 		return (0);
 	}
-	return (add_room(ft_strdup(rooms[0]), type, &(infos->room_list)));
+	return (add_room(ft_strdup(rooms[0]), type, infos));
 }
 
 static int	parse_line(char *line, t_recurse *infos)
@@ -51,7 +51,7 @@ static int	parse_line(char *line, t_recurse *infos)
 	{
 		if (!add_link(line, infos->room_list))
 		{
-			ERROR("add link failed");
+ERROR("add link failed");
 			return (0);
 		}
 		else
@@ -76,7 +76,7 @@ ERROR("failed classic room add");
 	return (1);
 }
 
-int lists_init(t_recurse **infos)
+int			lists_init(t_recurse **infos)
 {
 	char *line;
 
