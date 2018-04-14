@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 13:36:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/14 13:41:14 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,8 @@ printf("%s\n", line);
 		return (0);
 	else if (line[0] == '#' && line[1] != '#')
 		return (1);
-	else if (!infos->room_list || (ft_strchr(line, '-') && !add_link(line, infos->room_list)))
-	{
-		if (!infos->room_list)
-ERROR("room_list not init");
+	else if (!infos->room_list && ft_strchr(line, '-') && !add_link(line, infos->room_list))
 		return (0);
-	}
 	else if (line[0] == '#' && line[1] == '#')
 	{
 		if (ft_strcmp(line, "##end")
