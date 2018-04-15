@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   del_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 14:14:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:30:15 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	delete_array(char **array)
 	count = 0;
 	if (array)
 		while (array[count])
-			ft_memdel((void**)&array[count++]);
-	ft_memdel((void**)array);
+			free(array[count++]);
+	free(array);
 }

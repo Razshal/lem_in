@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 15:24:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 16:53:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ int				add_link(char *line, t_recurse *infos)
 	&& add_lroom(room1, new_room_link(room2, infos), infos)
 	&& add_lroom(room2, new_room_link(room1, infos), infos))
 	{
-		free(room1);
-		free(room2);
+		free(rooms[0]);
+		free(rooms[1]);
 		free(rooms);
 		return (1);
 	}
-	free(room1);
-	free(room2);
+	free(rooms[0]);
+	free(rooms[1]);
 	free(rooms);
 	return (0);
 }
