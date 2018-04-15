@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 18:42:56 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 13:22:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int			searching(char *start, int link, int moove_c, t_recurse *infos)
 	if (!get_lroom_pos(current_room, 1))
 		return (FAILURE);
 	while ((current_room = get_lroom_pos(
-					get_room(start, infos->room_list), link)->room))
+					get_room(start, infos), link)->room))
 	{
 		if ((moove_c = searching(current_room->name, link, moove_c + 1, infos))
 				< res && moove_c != FAILURE)
 		{
 			res = moove_c;
-			path = get_lroom_pos(get_room(start, infos->room_list), link)->room;
+			path = get_lroom_pos(get_room(start, infos), link)->room;
 		}
 		link++;
 	}
