@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/06 17:02:53 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/15 14:28:24 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,11 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ -fsanitize=address -g3
+	$(CC) $(CFLAGS) $^ -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $< -fsanitize=address -g3
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(LIBFT):
 	@make -C $(LIBDIR)

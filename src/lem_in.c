@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 14:04:02 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:07:18 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ int main(void)
 	}
 //	if (!moove_lems(infos))
 //		BUGERROR;
-	while (1)
-	{
 
-	}
 	print_struct(infos);
 }

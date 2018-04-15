@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:28:48 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:24:31 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,17 @@ int				add_link(char *line, t_recurse *infos)
 	rooms = ft_strsplit(line, '-');
 	room1 = rooms[0];
 	room2 = rooms[1];
-	if (get_room(room1, infos) && get_room(room2, infos))
+	if (get_room(room1, infos) && get_room(room2, infos)
+	&& add_lroom(room1, new_room_link(room2, infos), infos)
+	&& add_lroom(room2, new_room_link(room1, infos), infos))
 	{
-		if (add_lroom(room1, new_room_link(room2, infos), infos)
-				&& add_lroom(room2, new_room_link(room1, infos), infos))
-		{
-			free(rooms);
-			return (1);
-		}
+		free(room1);
+		free(room2);
+		free(rooms);
+		return (1);
 	}
+	free(room1);
+	free(room2);
 	free(rooms);
 	return (0);
 }

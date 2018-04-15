@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 13:56:34 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 15:13:15 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,19 @@ int			lists_init(t_recurse **infos)
 
 	(*infos)->lem_list = NULL;
 	(*infos)->room_list = NULL;
-	if (!get_next_line(0, &line))
+	line = NULL;
+	if (get_next_line(0, &line) < 1)
 		return (0);
 	if (!line || !lem_init(ft_atoi(line), *infos))
 		return (0);
-	while (get_next_line(0, &line))
+	ft_memdel((void**)&line);
+	while (noleaks_get_next_line(0, &line) > 0)
 	{
 		if (!parse_line(line, *infos))
+		{
+			ft_memdel((void**)&line);
 			return (0);
+		}
 	}
 	ft_memdel((void**)&line);
 	if (!(*infos)->lem_list || !(*infos)->room_list)

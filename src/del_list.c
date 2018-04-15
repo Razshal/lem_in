@@ -6,11 +6,11 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/21 15:22:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:14:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "../include/lem_in.h"
 
 void	delete_array(char **array)
 {
