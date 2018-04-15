@@ -6,7 +6,7 @@
 #    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/15 14:28:24 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/15 19:54:41 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
 LIBDIR = libft
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g3 -fsanitize=address
 
 INC_PATH = include
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
@@ -43,7 +43,7 @@ $(NAME): $(LIBFT) $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $< 
 
 $(LIBFT):
 	@make -C $(LIBDIR)

@@ -6,12 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:55:23 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 18:39:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 20:26:43 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "includes/libft.h"
+#include <stdio.h>
 
 int			ft_count_words(char const *s, char separator)
 {
@@ -42,56 +43,72 @@ int			ft_count_words(char const *s, char separator)
 	return (wordcount);
 }
 
-static int	count_l(const char *s, int cursor, char separator)
+static int		countwords(char const *s, char c)
 {
-	int count;
+	int i;
+	int i2;
 
-	count = 0;
-	while (s[cursor] != separator && s[cursor])
+	i = 0;
+	i2 = 0;
+	while (s[i])
 	{
-		cursor++;
-		count++;
+		while (s[i] == c && s[i])
+			i++;
+		if (s[i] != c && s[i])
+			i2++;
+		while (s[i] != c && s[i])
+			i++;
 	}
-	return (count);
+	return (i2);
 }
 
-static int	fill_array(const char *str, char **array, char c)
+static int		countletters(char const *s, char c, int i2)
 {
-	int	cursor;
-	int	c1;
-	int	c2;
+	int cl;
 
-	c1 = 0;
-	cursor = 0;
-	while (str[cursor])
-	{
-		c2 = 0;
-		if (str[cursor] != c && str[cursor])
-		{
-			if ((array[c1] = ft_strnew(count_l(str, cursor, c))) == NULL)
-				return (0);
-			while ((str[cursor] != c) && str[cursor])
-				array[c1][c2++] = str[cursor++];
-			array[c1++][c2] = '\0';
-		}
-		else
-			cursor++;
-	}
-	array[c1] = 0;
-	return (1);
+	cl = 0;
+	while (s[i2 + cl] != c && s[i2 + cl])
+		cl++;
+	printf("LETTERS:%d\n", cl);
+	return (cl);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static char		**cpy(char const *s, char c, char **fresh, int words)
 {
-	char **array;
+	int		i;
+	int		i3;
+	int		i2;
 
-	if (s != NULL)
+	i = -1;
+	i2 = 0;
+	while (++i < words)
 	{
-		array = (char**)malloc(sizeof(char*) * ft_count_words(s, c) + 1);
-		if (array == NULL)
+		i3 = 0;
+		while (s[i2] == c && s[i2])
+			i2++;
+		if (!(fresh[i] = ft_strnew(countletters(s, c, i2))))
 			return (NULL);
-		if ((fill_array(s, array, c)) != 0)
-			return (array);
+		while (s[i2] != c && s[i2])
+		{
+			fresh[i][i3] = s[i2];
+			i2++;
+			i3++;
+		}
 	}
-	return (NULL);
+	return (fresh);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char	**fresh;
+	int		words;
+	printf("LINE:%c\n", s[12]);
+	printf("LINE:%s\n", s);
+	if (!(s && c))
+		return (NULL);
+	words = countwords(s, c);
+	printf("%d\n", words);
+	if (!(fresh = (char**)ft_memalloc((words + 1) * sizeof(char*))))
+		return (NULL);
+	return (cpy(s, c, fresh, words));
 }
