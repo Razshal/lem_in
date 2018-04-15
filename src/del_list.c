@@ -6,13 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 19:30:38 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 19:50:28 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void	delete_array(char **array)
+void			delete_array(char **array)
 {
 	int count;
 
@@ -23,56 +23,35 @@ void	delete_array(char **array)
 	free(array);
 }
 
-static void	delete_lem_list(t_recurse *infos)
+static void     free_rl_links(t_room_links *rl_l)
 {
-	t_lem_list *next;
-
-	if (!infos->lem_list)
-		return;
-	next = infos->lem_list;
-	free(infos->lem_list);
-	infos->lem_list = next;
-	delete_lem_list(infos);
+    if (rl_l->next)
+        free_rl_links(rl_l->next);
+    ft_memdel((void**)&rl_l);
 }
 
-static void	delete_linked_rooms_list(t_room_links **links)
+static void     free_rl(t_room_list *rl)
 {
-	t_room_links *next;
-
-	if (!*links)
-		return;
-	next = (*links)->next;
-	free(*links);
-	*links = next;
-	delete_linked_rooms_list(links);
+    if (rl->next)
+        free_rl(rl->next);
+    free_rl_links(rl->l_rooms);
+    ft_memdel((void**)&rl->name);
+    ft_memdel((void**)&rl);
 }
 
-static void	delete_room_list(t_recurse *infos)
+static void    free_lems(t_lem_list *lems)
 {
-	t_room_list		*next;
-	t_room_links	*next_link;
-
-	if (!infos->room_list)
-		return;
-	next = infos->room_list;
-	delete_linked_rooms_list(&infos->room_list->l_rooms);
-	free(infos->room_list);
-	infos->room_list = next;
-	delete_room_list(infos);
+    if (lems->next)
+        free_lems(lems->next);
+    ft_memdel((void**)&lems->room);
+    ft_memdel((void**)&lems);
 }
 
-void	delete_struct(t_recurse *infos)
+int     		delete_struct(t_recurse *rec)
 {
-	t_lem_list *llist;
-	t_lem_list *llist_next;
-
-	llist = infos->lem_list->next;
-	while (infos->lem_list)
-	{
-		free(infos->lem_list);
-		infos->lem_list = llist;
-		llist = infos->lem_list->next;
-	}
-	if (infos->next_room)
-		free(infos->next_room);
+    if (rec->lem_list)
+        free_lems(rec->lem_list);
+    free_rl(rec->room_list);
+    ft_memdel((void**)&rec);
+    return (0);
 }
