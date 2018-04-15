@@ -6,7 +6,7 @@
 /*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:40:58 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/15 14:04:02 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,14 @@ int main(void)
 		return (0);
 	if (!lists_init(&infos))
 	{
-		print_lem_struct(infos->lem_list);
 		ft_putstr("ERROR");
 		return (0);
 	}
 //	if (!moove_lems(infos))
 //		BUGERROR;
+	while (1)
+	{
+
+	}
 	print_struct(infos);
 }
