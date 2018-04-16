@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 16:01:56 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:09:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int					add_room(char *room_name, int roomtype, t_recurse *infos)
 		rlist_local->next = infos->room_list;
 		infos->room_list = rlist_local;
 	}
+
 	return (1);
 }
 
