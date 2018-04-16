@@ -6,13 +6,12 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:55:23 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 20:26:43 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:49:31 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "includes/libft.h"
-#include <stdio.h>
 
 int			ft_count_words(char const *s, char separator)
 {
@@ -69,7 +68,6 @@ static int		countletters(char const *s, char c, int i2)
 	cl = 0;
 	while (s[i2 + cl] != c && s[i2 + cl])
 		cl++;
-	printf("LETTERS:%d\n", cl);
 	return (cl);
 }
 
@@ -102,12 +100,10 @@ char			**ft_strsplit(char const *s, char c)
 {
 	char	**fresh;
 	int		words;
-	printf("LINE:%c\n", s[12]);
-	printf("LINE:%s\n", s);
+
 	if (!(s && c))
 		return (NULL);
 	words = countwords(s, c);
-	printf("%d\n", words);
 	if (!(fresh = (char**)ft_memalloc((words + 1) * sizeof(char*))))
 		return (NULL);
 	return (cpy(s, c, fresh, words));

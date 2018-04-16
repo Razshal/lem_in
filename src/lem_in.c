@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 19:52:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:49:45 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int main(void)
 	}
 //	if (!moove_lems(infos))
 //		BUGERROR;
-//	print_struct(infos);
+	print_struct(infos);
 	delete_struct(infos);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colorparser.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 19:04:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:12:19 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:34:31 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			colorprinter(char *str)
 			else if ((colorcode = get_colorcode(&str[count])))
 			{
 				written += write(1, colorcode, ft_strlen(colorcode));
-				while (str[count] && str[count - 1] != '}')
+				while (str[count] && !(count > 0 && str[count - 1] == '}'))
 					count++;
 			}
 		}
