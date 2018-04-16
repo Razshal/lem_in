@@ -31,11 +31,12 @@ int		ft_list_length(t_room_list *list)
 	return (list == NULL ? 0 : 1 + ft_list_length(list->next));
 }
 
-void    read_ftab(t_father *ftab, int len, t_weight *wtab)
+void    read_ftab(t_father *ftab, int len)
 {
-    (void)ftab;
-    (void)len;
-    (void)wtab;
+    int i = -1;
+
+    while (++i < len)
+        ft_printf("NAME %s | FATHER %s\n", ftab[i].name, ftab[i].father);
 }
 
 void    print_tab(t_weight *wtab, int len)
@@ -142,7 +143,7 @@ int     solver(t_room_list *rl)
     INFO("INITDONE");
     solve(&wtab, &ftab, end_name, len);
     SUCCESSM("SOLVERDONE");
-    //read_ftab(ftab, len, wtab);
+    read_ftab(ftab, len);
     //return (get_path(ftab));
     return (0);
 }

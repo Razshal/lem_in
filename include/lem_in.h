@@ -67,6 +67,7 @@ int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
+int				solver(t_room_list *rl);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
