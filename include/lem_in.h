@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 19:49:51 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:33:40 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_recurse
 	t_room_list	*room_list;
 	t_lem_list	*lem_list;
 	t_room_list	*next_room;
+	char		*line;
 }				t_recurse;
 
 t_room_list		*get_room(char *name, t_recurse *infos);

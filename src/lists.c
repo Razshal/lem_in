@@ -6,13 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 18:43:26 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:01:56 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-t_room_list		*new_room(char *room_name, int room_type)
+t_room_list			*new_room(char *room_name, int room_type)
 {
 	t_room_list *rlist;
 
@@ -39,7 +39,7 @@ static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 	return (rlink);
 }
 
-int				add_room(char *room_name, int roomtype, t_recurse *infos)
+int					add_room(char *room_name, int roomtype, t_recurse *infos)
 {
 	t_room_list *rlist_local;
 
@@ -56,7 +56,8 @@ int				add_room(char *room_name, int roomtype, t_recurse *infos)
 	return (1);
 }
 
-static int		add_lroom(char *room_name, t_room_links *new_link, t_recurse *infos)
+static int			add_lroom(char *room_name,
+t_room_links *new_link, t_recurse *infos)
 {
 	t_room_list *room;
 
@@ -68,7 +69,7 @@ static int		add_lroom(char *room_name, t_room_links *new_link, t_recurse *infos)
 	return (1);
 }
 //TODO check if free frees 2dim arrays
-int				add_link(char *line, t_recurse *infos)
+int					add_link(char *line, t_recurse *infos)
 {
 	char			**rooms;
 	char			*room1;

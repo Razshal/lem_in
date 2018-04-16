@@ -21,14 +21,15 @@ SRC_NAME = get_list.c \
 	   lem_checks.c \
 	   lists_init.c \
 	   del_list.c \
-	   debug.c
+	   debug.c \
+	   paths.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
 CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
 LIBDIR = libft
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra -g3 -fsanitize=address
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address -g3
 
 INC_PATH = include
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))

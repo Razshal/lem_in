@@ -96,7 +96,7 @@ SRC = ft_atoi.c \
 COPYPATH = ~/Projects/lem_in/libft
 
 OBJ = $(SRC:.c=.o)
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

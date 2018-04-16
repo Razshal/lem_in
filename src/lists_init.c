@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 20:07:58 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:50:06 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,53 +44,54 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	return (add_room(room_name, type, infos));
 }
 
-static int	parse_line(char *line, t_recurse *infos)
+static int	parse_line(t_recurse *infos)
 {
-	if (!line || !line[0] || ft_strlen(line) < 2 || line[0] == 'L')
+	if (!infos->line || !infos->line[0]
+	|| ft_strlen(infos->line) < 2 || infos->line[0] == 'L')
 		return (0);
-	else if (line[0] == '#' && line[1] != '#')
+	else if (infos->line[0] == '#' && infos->line[1] != '#')
 		return (1);
-	else if (ft_strchr(line, '-'))
+	else if (ft_strchr(infos->line, '-'))
 	{
-		if (!add_link(line, infos))
+		if (!add_link(infos->line, infos))
 			return (0);
 	}
-	else if (line[0] == '#' && line[1] == '#')
+	else if (infos->line[0] == '#' && infos->line[1] == '#')
 	{
-		if (ft_strcmp(line, "##end") && noleaks_get_next_line(0, &line)
-				&& split_and_add_room(line, END, infos))
-			return (1);		
-		else if (ft_strcmp(line, "##start") && noleaks_get_next_line(0, &line)
-				&& split_and_add_room(line, START, infos))
+		if (ft_strcmp(infos->line, "##end")
+		&& noleaks_get_next_line(0, &infos->line)
+		&& split_and_add_room(infos->line, END, infos))
+			return (1);
+		else if (ft_strcmp(infos->line, "##start")
+		&& noleaks_get_next_line(0, &infos->line)
+		&& split_and_add_room(infos->line, START, infos))
 			return (1);
 		return (0);
 	}
-	else if (!split_and_add_room(line, CLASSICROOM, infos))
+	else if (!split_and_add_room(infos->line, CLASSICROOM, infos))
 		return (0);
 	return (1);
 }
 
 int			lists_init(t_recurse **infos)
 {
-	char *line;
-
 	(*infos)->lem_list = NULL;
 	(*infos)->room_list = NULL;
-	line = NULL;
-	if (get_next_line(0, &line) < 1)
+	(*infos)->line = NULL;
+
+	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
-	if (!line || !lem_init(ft_atoi(line), *infos))
+	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))
 		return (0);
-	ft_memdel((void**)&line);
-	while (noleaks_get_next_line(0, &line) > 0)
+	while (noleaks_get_next_line(0, &(*infos)->line) > 0)
 	{
-		if (!parse_line(line, *infos))
+		if (!parse_line(*infos))
 		{
-			ft_memdel((void**)&line);
+			ft_memdel((void**)&(*infos)->line);
 			return (0);
 		}
 	}
-	ft_memdel((void**)&line);
+	ft_memdel((void**)&(*infos)->line);
 	if (!(*infos)->lem_list || !(*infos)->room_list)
 		return (0);
 	return (1);
