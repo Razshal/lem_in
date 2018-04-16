@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 15:50:06 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:01:45 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,18 @@ static int	parse_line(t_recurse *infos)
 	else if (infos->line[0] == '#' && infos->line[1] != '#')
 		return (1);
 	else if (ft_strchr(infos->line, '-'))
-	{
-		if (!add_link(infos->line, infos))
-			return (0);
-	}
+		return(add_link(infos->line, infos));
 	else if (infos->line[0] == '#' && infos->line[1] == '#')
 	{
-		if (ft_strcmp(infos->line, "##end")
-		&& noleaks_get_next_line(0, &infos->line)
-		&& split_and_add_room(infos->line, END, infos))
-			return (1);
-		else if (ft_strcmp(infos->line, "##start")
-		&& noleaks_get_next_line(0, &infos->line)
-		&& split_and_add_room(infos->line, START, infos))
-			return (1);
+		if (!ft_strcmp(infos->line, "##end")
+		&& noleaks_get_next_line(0, &infos->line))
+			return (split_and_add_room(infos->line, END, infos));
+		else if (!ft_strcmp(infos->line, "##start")
+		&& noleaks_get_next_line(0, &infos->line))
+			return (split_and_add_room(infos->line, START, infos));
 		return (0);
 	}
-	else if (!split_and_add_room(infos->line, CLASSICROOM, infos))
-		return (0);
-	return (1);
+	return (split_and_add_room(infos->line, CLASSICROOM, infos));
 }
 
 int			lists_init(t_recurse **infos)

@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 19:50:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:00:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void			delete_array(char **array)
 
 static void     free_rl_links(t_room_links *rl_l)
 {
+    if (!rl_l)
+        return;
     if (rl_l->next)
         free_rl_links(rl_l->next);
     ft_memdel((void**)&rl_l);
