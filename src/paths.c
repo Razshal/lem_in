@@ -6,15 +6,16 @@
 /*   By: abouvero <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 12:24:57 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/16 12:25:01 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/18 16:35:17 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-typedef struct  s_path
+typedef struct   s_path
 {
-	char *room_name;
+	t_room_list 	*room;
+	int 			occupied;
 	struct s_path 	*next;
 }				t_path;
 
@@ -66,6 +67,8 @@ void 	free_tabs(t_weight *tab, t_father *ftab, int len)
 		ft_memdel((void**)&ftab[i].name);
 		ft_memdel((void**)&wtab[i].father);
 	}
+	ft_memdel((void**)&wtab);
+	ft_memdel((void**)&ftab);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +76,16 @@ void 	free_tabs(t_weight *tab, t_father *ftab, int len)
 int		ft_list_length(t_room_list *list)
 {
 	return (list == NULL ? 0 : 1 + ft_list_length(list->next));
+}
+
+t_room_list *get_room_addr(t_room_list *rl, char *name)
+{
+	while (rl)
+	{
+		if (!ft_strcmp(rl->name, name))
+			return (rl);
+		rl = rl->next;
+	}
 }
 
 char	*last_rname(t_path *path)
@@ -84,14 +97,15 @@ char	*last_rname(t_path *path)
 	return (path->room_name);
 }
 
-t_path	*create_path(t_path *path, char *name)
+t_path	*create_path(t_path *path, t_room_list *room)
 {
 	t_path	*new;
 
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
 	new->next = NULL;
-	new->room_name = ft_strdup(name);
+	new->room = room;
+	new->occupied = 0;
 	if (!path)
 		return (new);
 	while (path->next)
@@ -100,7 +114,7 @@ t_path	*create_path(t_path *path, char *name)
 	return (path);
 }
 
-t_path	*get_path(t_father *ftab, int len)
+t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
 {
     int i = -1;
     t_path 	*path;
@@ -110,12 +124,12 @@ t_path	*get_path(t_father *ftab, int len)
     {
     	if (ftab[i].father == NULL && path == NULL)
     	{
-    		path = create_path(path, ftab[i].name);
+    		path = create_path(path, get_room_addr(rl, ftab[i].name));
     		i = -1;
     	}
     	else if (ft_strcmp(ftab[i].father, last_rname(path)) == 0)
     	{
-    		path = create_path(path, ftab[i].name);
+    		path = create_path(path, get_room_addr(rl, ftab[i].name));
     		i = -1;
     	}
     }
@@ -156,7 +170,7 @@ int     solve(t_weight **wtab, t_father **ftab, char *end, int len)
 
     i = -1;
     if ((min = get_min(*wtab, len)) == -1) //Recupere l'index dans le tableau de la room ou le poid est le plus faible
-        return (0);
+        return (0); 
     while (ft_strcmp(end, (*wtab)[min].name))
     {
         (*wtab)[min].done = 1;

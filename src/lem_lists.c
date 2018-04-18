@@ -20,6 +20,8 @@ static t_lem_list	*new_lem(int lem_num, char *room_name)
 		return (NULL);
 	llist->lem = lem_num;
 	llist->room = room_name;
+	llist->arrived = 0;
+	llist->path = NULL;
 	llist->next = NULL;
 	return (llist);
 }
