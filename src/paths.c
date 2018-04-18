@@ -12,6 +12,12 @@
 
 #include "../include/lem_in.h"
 
+typedef struct  s_path
+{
+	char *room_name;
+	struct s_path 	*next;
+}				t_path;
+
 typedef struct  s_weight
 {
     char            *name;
@@ -26,24 +32,94 @@ typedef struct  s_father
     char    *father;
 }               t_father;
 
-int		ft_list_length(t_room_list *list)
-{
-	return (list == NULL ? 0 : 1 + ft_list_length(list->next));
-}
-
-void    read_ftab(t_father *ftab, int len)
-{
-    int i = -1;
-
-    while (++i < len)
-        ft_printf("NAME %s | FATHER %s\n", ftab[i].name, ftab[i].father);
-}
+//////////////////////////////////////////////////////////////////////////////////////////
 
 void    print_tab(t_weight *wtab, int len)
 {
     int i = -1;
     while (++i < len)
         ft_printf("%s %d %d\n", wtab[i].name, wtab[i].weight, wtab[i].done);
+}
+
+void	print_path(t_path *path)
+{
+	while (path)
+	{
+		ft_printf("%s", path->room_name);
+		path->next ? ft_printf(" -> ") : ft_printf("\n");
+		path = path->next;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+void 	free_tabs(t_weight *tab, t_father *ftab, int len)
+{
+	int 	i;
+
+	i = -1;
+	while (++i < len)
+		ft_memdel((void**)&wtab[i].name);
+	i = -1;
+	while (++i < len)
+	{
+		ft_memdel((void**)&ftab[i].name);
+		ft_memdel((void**)&wtab[i].father);
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+int		ft_list_length(t_room_list *list)
+{
+	return (list == NULL ? 0 : 1 + ft_list_length(list->next));
+}
+
+char	*last_rname(t_path *path)
+{
+	if (!path)
+		return (NULL); // SEGV
+	while (path->next)
+		path = path->next;
+	return (path->room_name);
+}
+
+t_path	*create_path(t_path *path, char *name)
+{
+	t_path	*new;
+
+	if (!(new = (t_path*)malloc(sizeof(t_path))))
+		return (NULL);
+	new->next = NULL;
+	new->room_name = ft_strdup(name);
+	if (!path)
+		return (new);
+	while (path->next)
+		path = path->next;
+	path->next = new;
+	return (path);
+}
+
+t_path	*get_path(t_father *ftab, int len)
+{
+    int i = -1;
+    t_path 	*path;
+
+    path = NULL;
+    while (++i < len)
+    {
+    	if (ftab[i].father == NULL && path == NULL)
+    	{
+    		path = create_path(path, ftab[i].name);
+    		i = -1;
+    	}
+    	else if (ft_strcmp(ftab[i].father, last_rname(path)) == 0)
+    	{
+    		path = create_path(path, ftab[i].name);
+    		i = -1;
+    	}
+    }
+    return (path);
 }
 
 int     get_index(char *n, t_weight *wtab, int len)
@@ -68,6 +144,8 @@ int     get_min(t_weight *wtab, int len)
         min = wtab[i].weight > -1 && wtab[i].weight < min && !wtab[i].done ? i : min;
     return (min == INTMAX ? -1 : min);
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int     solve(t_weight **wtab, t_father **ftab, char *end, int len)
 {
@@ -124,7 +202,6 @@ char*   init_solver(t_room_list *rl, t_weight **wtab, t_father **ftab, int len)
         (*ftab)[c++].father = NULL;
         rl = rl->next;
     }
-    //print_tab(wtab, len);
     return (endn);
 }
 
@@ -132,6 +209,7 @@ int     solver(t_room_list *rl)
 {
     t_weight    *wtab;
     t_father    *ftab;
+    t_path		*path;
     char        *end_name;
     int         len;
 
@@ -143,7 +221,8 @@ int     solver(t_room_list *rl)
     INFO("INITDONE");
     solve(&wtab, &ftab, end_name, len);
     SUCCESSM("SOLVERDONE");
-    read_ftab(ftab, len);
-    //return (get_path(ftab));
-    return (0);
+    path = get_path(ftab, len);
+    free_tabs(wtab, ftab, len);
+    read_path(path);
+    return (path);
 }
