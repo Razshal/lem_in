@@ -80,18 +80,20 @@ char	*last_rname(t_path *path)
 t_path	*create_path(t_path *path, t_room_list *room)
 {
 	t_path	*new;
+    t_path  *beg;
 
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
 	new->next = NULL;
 	new->room = room;
 	new->occupied = 0;
+    beg = path;
 	if (!path)
 		return (new);
 	while (path->next)
 		path = path->next;
 	path->next = new;
-	return (path);
+	return (beg);
 }
 
 t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
@@ -107,7 +109,7 @@ t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
     		path = create_path(path, get_room_addr(rl, ftab[i].name));
     		i = -1;
     	}
-    	else if (ft_strcmp(ftab[i].father, last_rname(path)) == 0)
+    	else if (path != NULL && ftab[i].father != NULL &&  ft_strcmp(ftab[i].father, last_rname(path)) == 0)
     	{
     		path = create_path(path, get_room_addr(rl, ftab[i].name));
     		i = -1;
@@ -216,6 +218,7 @@ t_path   *solver(t_room_list *rl)
     solve(&wtab, &ftab, end_name, len);
     SUCCESSM("SOLVERDONE");
     path = get_path(ftab, rl, len);
+    SUCCESSM("PATHDONE");
     free_tabs(wtab, ftab, len);
     print_path(path);
     return (path);
