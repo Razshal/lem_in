@@ -12,8 +12,6 @@
 
 #include "../include/lem_in.h"
 
-//Changer l'init de lem list (ajouter /int arrived = 0/ et /t_path * = NULL/)
-
 int 	all_arrived(t_lem_list *lem)
 {
 	while (lem)
@@ -35,6 +33,7 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 		lem->path = solver(rl);
 		lem = lem->next;
 	}
+	SUCCESSM("Solution :");
 	while (!all_arrived(beg))
 	{
 		lem = beg;

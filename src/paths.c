@@ -52,6 +52,25 @@ void 	free_tabs(t_weight *wtab, t_father *ftab, int len)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
+t_path  *rev_list(t_path *path)
+{
+    t_path *next;
+    t_path *curr;
+    t_path *prev;
+
+    curr = path;
+    next = NULL;
+    prev = NULL;
+    while (curr)
+    {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return (prev);
+}
+
 int		ft_list_length(t_room_list *list)
 {
 	return (list == NULL ? 0 : 1 + ft_list_length(list->next));
@@ -95,31 +114,61 @@ t_path	*create_path(t_path *path, t_room_list *room)
 	return (beg);
 }
 
-t_path	*get_path(t_father *ftab, t_room_list *rl, int len, char *end_name)
+// t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
+// {
+//     int i = -1;
+//     t_path 	*path;
+//     t_room_list *room;
+
+//     path = NULL;
+//     while (++i < len)
+//     {
+//         print_path(path);
+//     	if (ftab[i].father == NULL && path == NULL)
+//     	{
+//     		path = create_path(path, get_room_addr(rl, ftab[i].name));
+//     		i = -1;
+//     	}
+//     	else if (path != NULL && ftab[i].father != NULL &&  ft_strcmp(ftab[i].father, last_rname(path)) == 0)
+//     	{
+//             if ((room = get_room_addr(rl, ftab[i].name))->number_of_links > 1 || room->type != END)
+//             {
+//     		    path = create_path(path, room);
+//     		    i = -1;
+//             }
+//     	}
+//     }
+//     return (path);
+// }
+
+t_path     *init_path(t_room_list *rl)
+{
+    while (rl)
+    {
+        if (rl->type == END)
+            return (create_path(NULL, rl));
+        rl = rl->next;
+    }
+    return (NULL);
+}
+
+t_path     *get_path(t_father *ftab, t_room_list *rl, int len)
 {
     int i = -1;
-    t_path 	*path;
-    t_room_list *room;
+    t_path     *path;
 
-    path = NULL;
+    path = init_path(rl);
     while (++i < len)
     {
-        //print_path(path);
-    	if (ftab[i].father == NULL && path == NULL)
-    	{
-    		path = create_path(path, get_room_addr(rl, ftab[i].name));
-    		i = -1;
-    	}
-    	else if (path != NULL && ftab[i].father != NULL &&  ft_strcmp(ftab[i].father, last_rname(path)) == 0)
-    	{
-            if ((room = get_room_addr(rl, ftab[i].name))->number_of_links > 1 || !ft_strcmp(room->name, end_name))
-            {
-    		    path = create_path(path, room);
-    		    i = -1;
-            }
-    	}
+        if (i + 1 == len)
+            return (path);
+        else if (!ft_strcmp(ftab[i].name, last_rname(path)) && ftab[i].father)
+        {
+            path = create_path(path, get_room_addr(rl, ftab[i].father));
+            i = -1;
+        }
     }
-    return (path);
+    return (NULL);
 }
 
 int     get_index(char *n, t_weight *wtab, int len)
@@ -220,9 +269,9 @@ t_path   *solver(t_room_list *rl)
         return (0);
     INFO("INITDONE");
     solve(&wtab, &ftab, end_name, len);
-    SUCCESSM("SOLVERDONE");
-    path = get_path(ftab, rl, len, end_name);
-    SUCCESSM("PATHDONE");
+    INFO("SOLVERDONE");
+    path = rev_list(get_path(ftab, rl, len));
+    INFO("PATHDONE");
     free_tabs(wtab, ftab, len);
     print_path(path);
     return (path);
