@@ -45,6 +45,7 @@ typedef struct	s_lem_list
 	char				*room;
 	int 				arrived;
 	struct s_path 		*path;
+	struct s_path 		*beg_path;
 	struct s_lem_list	*next;
 }				t_lem_list;
 

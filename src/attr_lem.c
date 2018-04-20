@@ -12,6 +12,24 @@
 
 #include "../include/lem_in.h"
 
+void 	recfr_path(t_path *path)
+{
+	if (!path)
+		return ;
+	if (path->next)
+		recfr_path(path->next);
+	ft_memdel((void**)&path);
+}
+
+void 	free_paths(t_lem_list *lem)
+{
+	while (lem)
+	{
+		recfr_path(lem->beg_path);
+		lem = lem->next;
+	}
+}
+
 int 	all_arrived(t_lem_list *lem)
 {
 	while (lem)
@@ -31,6 +49,7 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	while (lem)
 	{
 		lem->path = solver(rl);
+		lem->beg_path = lem->path;
 		lem = lem->next;
 	}
 	SUCCESSM("Solution :");
@@ -52,5 +71,5 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 		}
 		ft_printf("\n");
 	}
-	//free_paths();
+	free_paths(beg);
 }
