@@ -33,6 +33,7 @@ struct	s_room_list
 {
 	char				*name;
 	int					type;
+	int 				occupied;
 	int					number_of_links;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
@@ -58,7 +59,6 @@ typedef struct	s_recurse
 typedef struct   s_path
 {
 	t_room_list 	*room;
-	int 			occupied;
 	struct s_path 	*next;
 }				t_path;
 
@@ -91,6 +91,7 @@ int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
 t_path			*solver(t_room_list *rl);
+void	moove_lems(t_lem_list *lem, t_room_list *rl);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")

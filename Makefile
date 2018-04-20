@@ -22,7 +22,8 @@ SRC_NAME = get_list.c \
 	   lists_init.c \
 	   del_list.c \
 	   debug.c \
-	   paths.c
+	   paths.c \
+	   attr_lem.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
 CPPFLAGS = -Iinclude

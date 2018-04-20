@@ -86,7 +86,6 @@ t_path	*create_path(t_path *path, t_room_list *room)
 		return (NULL);
 	new->next = NULL;
 	new->room = room;
-	new->occupied = 0;
     beg = path;
 	if (!path)
 		return (new);
@@ -105,7 +104,7 @@ t_path	*get_path(t_father *ftab, t_room_list *rl, int len, char *end_name)
     path = NULL;
     while (++i < len)
     {
-        print_path(path);
+        //print_path(path);
     	if (ftab[i].father == NULL && path == NULL)
     	{
     		path = create_path(path, get_room_addr(rl, ftab[i].name));
