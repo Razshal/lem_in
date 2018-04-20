@@ -12,27 +12,6 @@
 
 #include "../include/lem_in.h"
 
-typedef struct   s_path
-{
-	t_room_list 	*room;
-	int 			occupied;
-	struct s_path 	*next;
-}				t_path;
-
-typedef struct  s_weight
-{
-    char            *name;
-    t_room_links    *l_rooms;
-    int             weight;
-    int             done;
-}               t_weight;
-
-typedef struct  s_father
-{
-    char    *name;
-    char    *father;
-}               t_father;
-
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void    print_tab(t_weight *wtab, int len)
@@ -46,7 +25,7 @@ void	print_path(t_path *path)
 {
 	while (path)
 	{
-		ft_printf("%s", path->room_name);
+		ft_printf("%s", path->room->name);
 		path->next ? ft_printf(" -> ") : ft_printf("\n");
 		path = path->next;
 	}
@@ -54,7 +33,7 @@ void	print_path(t_path *path)
 
 /////////////////////////////////////////////////////////////////////////////////////////
 
-void 	free_tabs(t_weight *tab, t_father *ftab, int len)
+void 	free_tabs(t_weight *wtab, t_father *ftab, int len)
 {
 	int 	i;
 
@@ -65,7 +44,7 @@ void 	free_tabs(t_weight *tab, t_father *ftab, int len)
 	while (++i < len)
 	{
 		ft_memdel((void**)&ftab[i].name);
-		ft_memdel((void**)&wtab[i].father);
+		ft_memdel((void**)&ftab[i].father);
 	}
 	ft_memdel((void**)&wtab);
 	ft_memdel((void**)&ftab);
@@ -86,6 +65,7 @@ t_room_list *get_room_addr(t_room_list *rl, char *name)
 			return (rl);
 		rl = rl->next;
 	}
+    return (NULL);
 }
 
 char	*last_rname(t_path *path)
@@ -94,7 +74,7 @@ char	*last_rname(t_path *path)
 		return (NULL); // SEGV
 	while (path->next)
 		path = path->next;
-	return (path->room_name);
+	return (path->room->name);
 }
 
 t_path	*create_path(t_path *path, t_room_list *room)
@@ -219,7 +199,7 @@ char*   init_solver(t_room_list *rl, t_weight **wtab, t_father **ftab, int len)
     return (endn);
 }
 
-int     solver(t_room_list *rl)
+t_path   *solver(t_room_list *rl)
 {
     t_weight    *wtab;
     t_father    *ftab;
@@ -235,8 +215,8 @@ int     solver(t_room_list *rl)
     INFO("INITDONE");
     solve(&wtab, &ftab, end_name, len);
     SUCCESSM("SOLVERDONE");
-    path = get_path(ftab, len);
+    path = get_path(ftab, rl, len);
     free_tabs(wtab, ftab, len);
-    read_path(path);
+    print_path(path);
     return (path);
 }

@@ -56,4 +56,5 @@ void	moove_lems(t_lem_list *lem, t_path *path, t_room_list *rl)
 		}
 		ft_printf("\n");
 	}
+	//free_paths();
 }
