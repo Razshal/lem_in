@@ -96,14 +96,16 @@ t_path	*create_path(t_path *path, t_room_list *room)
 	return (beg);
 }
 
-t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
+t_path	*get_path(t_father *ftab, t_room_list *rl, int len, char *end_name)
 {
     int i = -1;
     t_path 	*path;
+    t_room_list *room;
 
     path = NULL;
     while (++i < len)
     {
+        print_path(path);
     	if (ftab[i].father == NULL && path == NULL)
     	{
     		path = create_path(path, get_room_addr(rl, ftab[i].name));
@@ -111,8 +113,11 @@ t_path	*get_path(t_father *ftab, t_room_list *rl, int len)
     	}
     	else if (path != NULL && ftab[i].father != NULL &&  ft_strcmp(ftab[i].father, last_rname(path)) == 0)
     	{
-    		path = create_path(path, get_room_addr(rl, ftab[i].name));
-    		i = -1;
+            if ((room = get_room_addr(rl, ftab[i].name))->number_of_links > 1 || !ft_strcmp(room->name, end_name))
+            {
+    		    path = create_path(path, room);
+    		    i = -1;
+            }
     	}
     }
     return (path);
@@ -217,9 +222,12 @@ t_path   *solver(t_room_list *rl)
     INFO("INITDONE");
     solve(&wtab, &ftab, end_name, len);
     SUCCESSM("SOLVERDONE");
-    path = get_path(ftab, rl, len);
+    path = get_path(ftab, rl, len, end_name);
     SUCCESSM("PATHDONE");
     free_tabs(wtab, ftab, len);
     print_path(path);
     return (path);
 }
+
+//Si plusieurs father = NULL, get_path prend le premier du coup rip
+//Si plusieurs meme fils pareil
