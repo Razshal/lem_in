@@ -274,6 +274,7 @@ t_path   *solver(t_room_list *rl)
     INFO("PATHDONE");
     free_tabs(wtab, ftab, len);
     print_path(path);
+    ft_memdel((void**)&end_name);
     return (path);
 }
 
