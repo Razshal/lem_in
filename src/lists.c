@@ -20,6 +20,7 @@ t_room_list			*new_room(char *room_name, int room_type)
 		return (NULL);
 	rlist->name = room_name;
 	rlist->type = room_type;
+	rlist->occupied = 0;
 	rlist->number_of_links = 0;
 	rlist->l_rooms = NULL;
 	rlist->next = NULL;

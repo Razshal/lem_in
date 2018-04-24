@@ -55,6 +55,7 @@ int main(void)
 //	if (!moove_lems(infos))
 //		BUGERROR;
 	print_struct(infos);
-	solver(infos->room_list);
+	//solver(infos->room_list);
+	moove_lems(infos->lem_list, infos->room_list);
 	//delete_struct(infos);
 }

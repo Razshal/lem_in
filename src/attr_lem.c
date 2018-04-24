@@ -10,9 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lem_in.h"
+#include "../include/lem_in.h"
 
-//Changer l'init de lem list (ajouter /int arrived = 0/ et /t_path * = NULL/)
+void 	recfr_path(t_path *path)
+{
+	if (!path)
+		return ;
+	if (path->next)
+		recfr_path(path->next);
+	ft_memdel((void**)&path);
+}
+
+void 	free_paths(t_lem_list *lem)
+{
+	while (lem)
+	{
+		recfr_path(lem->beg_path);
+		lem = lem->next;
+	}
+}
 
 int 	all_arrived(t_lem_list *lem)
 {
@@ -25,7 +41,7 @@ int 	all_arrived(t_lem_list *lem)
 	return (1);
 }
 
-void	moove_lems(t_lem_list *lem, t_path *path, t_room_list *rl)
+void	moove_lems(t_lem_list *lem, t_room_list *rl)
 {
 	t_lem_list *beg;
 
@@ -33,27 +49,27 @@ void	moove_lems(t_lem_list *lem, t_path *path, t_room_list *rl)
 	while (lem)
 	{
 		lem->path = solver(rl);
+		lem->beg_path = lem->path;
 		lem = lem->next;
 	}
-	while (!all_arrived(lem))
+	SUCCESSM("Solution :");
+	while (!all_arrived(beg))
 	{
 		lem = beg;
 		while (lem)
 		{
-			if (!lem->path->occupied)
+			if (!lem->path->next)
+				lem->arrived = 1;
+			else if (!lem->arrived && !lem->path->next->room->occupied)
 			{
-				ft_printf("L%d-%s ", lem->lem, lem->path->room->name);
-				lem->path->occupied = 0;
-				if (!lem->path->next)
-					lem->arrived = 1;
-				else
-				{
-					lem->path = lem->path->next;
-					lem->path->occupied = 1;
-				}
+				ft_printf("L%d-%s ", lem->lem, lem->path->next->room->name);
+				lem->path->room->occupied = 0;
+				lem->path = lem->path->next;
+				lem->path->room->occupied = lem->path->next ? 1 : 0;
 			}
 			lem = lem->next;
 		}
 		ft_printf("\n");
 	}
+	free_paths(beg);
 }

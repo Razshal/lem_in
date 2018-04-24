@@ -33,6 +33,7 @@ struct	s_room_list
 {
 	char				*name;
 	int					type;
+	int 				occupied;
 	int					number_of_links;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
@@ -44,6 +45,7 @@ typedef struct	s_lem_list
 	char				*room;
 	int 				arrived;
 	struct s_path 		*path;
+	struct s_path 		*beg_path;
 	struct s_lem_list	*next;
 }				t_lem_list;
 
@@ -54,6 +56,26 @@ typedef struct	s_recurse
 	t_room_list	*next_room;
 	char		*line;
 }				t_recurse;
+
+typedef struct   s_path
+{
+	t_room_list 	*room;
+	struct s_path 	*next;
+}				t_path;
+
+typedef struct  s_weight
+{
+    char            *name;
+    t_room_links    *l_rooms;
+    int             weight;
+    int             done;
+}               t_weight;
+
+typedef struct  s_father
+{
+    char    *name;
+    char    *father;
+}               t_father;
 
 t_room_list		*get_room(char *name, t_recurse *infos);
 t_room_list		*get_last_item(t_room_list *rlist);
@@ -69,7 +91,8 @@ int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
-int				solver(t_room_list *rl);
+t_path			*solver(t_room_list *rl);
+void	moove_lems(t_lem_list *lem, t_room_list *rl);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
