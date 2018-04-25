@@ -48,7 +48,7 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	beg = lem;
 	while (lem)
 	{
-		lem->path = solver(rl);
+		lem->path = get_path(rl);
 		lem->beg_path = lem->path;
 		lem = lem->next;
 	}

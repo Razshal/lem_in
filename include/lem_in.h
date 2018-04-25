@@ -34,6 +34,7 @@ struct	s_room_list
 	char				*name;
 	int					type;
 	int 				occupied;
+	int 				weight;
 	int					number_of_links;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
@@ -91,7 +92,7 @@ int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
-t_path			*solver(t_room_list *rl);
+t_path	*get_path(t_room_list *rl);
 void	moove_lems(t_lem_list *lem, t_room_list *rl);
 
 //////////////// DEBUG ////////////////////
