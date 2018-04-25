@@ -63,11 +63,21 @@ int 	initialized(t_room_links *links)
 	return (0);
 }
 
+void 	restart_weight(t_room_list *rl)
+{
+	while (rl)
+	{
+		rl->weight = rl->type == END ? 0 : -1;
+		rl = rl->next;
+	}
+}
+
 void 	init_weight(t_room_list *rl)
 {
 	t_room_list *beg;
 
 	beg = rl;
+	restart_weight(rl);
 	while (rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)
@@ -97,10 +107,9 @@ t_path	*add_path(t_path *path, t_room_list *room)
 	return (beg);
 }
 
-t_path 	*solve_path(t_room_list *rl, t_path *path, int traffic)
+t_path 	*solve_path(t_room_list *rl, t_path *path)
 {
 	t_room_links *links;
-	(void)traffic;
 
 	path = add_path(path, rl);
 	while (last(path)->room->type != END)
@@ -122,11 +131,24 @@ t_room_list	*get_start(t_room_list *rl)
 	return (NULL);
 }
 
+t_path	*apply_traffic(t_path *path)
+{
+	t_path	*beg;
+
+	beg = path;
+	while (path)
+	{
+		path->room->traffic = 1;
+		path = path->next;
+	}
+	return (beg);
+}
+
 t_path	*get_path(t_room_list *rl)
 {
 	t_path *path;
 
-	path = NULL;
 	init_weight(rl);
-	return (solve_path(get_start(rl), path, 0));
+	path = solve_path(get_start(rl), NULL);
+	return (apply_traffic(path));
 }
