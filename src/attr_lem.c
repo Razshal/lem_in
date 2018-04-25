@@ -41,35 +41,60 @@ int 	all_arrived(t_lem_list *lem)
 	return (1);
 }
 
-void	moove_lems(t_lem_list *lem, t_room_list *rl)
+void	print_path(t_path *path)
 {
-	t_lem_list *beg;
+	while (path)
+	{
+		ft_printf("%s", path->room->name);
+		path->next ? ft_printf(" -> ") : ft_printf("\n");
+		path = path->next;
+	}
+}
 
-	beg = lem;
+void	attr_lems(t_lem_list *lem, t_room_list *rl)
+{
 	while (lem)
 	{
 		lem->path = get_path(rl);
 		lem->beg_path = lem->path;
 		lem = lem->next;
 	}
-	SUCCESSM("Solution :");
-	while (!all_arrived(beg))
+}
+
+void	moove_lems(t_lem_list *lem, t_room_list *rl)
+{
+	t_lem_list *beg;
+
+	beg = lem;
+	attr_lems(lem, rl);
+	while (lem)
 	{
-		lem = beg;
-		while (lem)
-		{
-			if (!lem->path->next)
-				lem->arrived = 1;
-			else if (!lem->arrived && !lem->path->next->room->occupied)
-			{
-				ft_printf("L%d-%s ", lem->lem, lem->path->next->room->name);
-				lem->path->room->occupied = 0;
-				lem->path = lem->path->next;
-				lem->path->room->occupied = lem->path->next ? 1 : 0;
-			}
-			lem = lem->next;
-		}
+		ft_printf("%d : ", lem->lem);
+		if (lem->path)
+			print_path(lem->path);
+		else
+			ft_printf("(null)");
 		ft_printf("\n");
+		lem = lem->next;
 	}
-	free_paths(beg);
+	// SUCCESSM("Solution :");
+	// while (!all_arrived(beg))
+	// {
+	// 	lem = beg;
+	// 	while (lem)
+	// 	{
+	// 		if (!lem->path->next)
+	// 			lem->arrived = 1;
+	// 		else if (!lem->arrived && !lem->path->next->room->occupied)
+	// 		{
+	// 			ft_printf("L%d-%s ", lem->lem, lem->path->next->room->name);
+	// 			lem->path->room->occupied = 0;
+	// 			lem->path = lem->path->next;
+	// 			lem->path->room->occupied = lem->path->next ? 1 : 0;
+	// 		}
+	// 		lem = lem->next;
+	// 	}
+	// 	ft_printf("\n");
+	// }
+	// free_paths(beg);
 }

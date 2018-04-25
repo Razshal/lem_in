@@ -28,7 +28,7 @@ t_room_list *get_min_addr(t_room_links *links)
 	room = NULL;
 	while (links)
 	{
-		if (links->room->weight != -1 && links->room->weight < min)
+		if (links->room->weight != -1 && !links->room->traffic && links->room->weight < min)
 		{
 			min = links->room->weight;
 			room = links->room;
@@ -45,7 +45,7 @@ int 	get_min(t_room_links *rl)
 	min = INTMAX;
 	while (rl)
 	{
-		if (rl->room->weight != -1)
+		if (rl->room->weight != -1 && !rl->room->traffic)
 			min = rl->room->weight < min ? rl->room->weight : min;
 		rl = rl->next;
 	}
@@ -72,7 +72,7 @@ void 	restart_weight(t_room_list *rl)
 	}
 }
 
-void 	init_weight(t_room_list *rl)
+int		init_weight(t_room_list *rl)
 {
 	t_room_list *beg;
 
@@ -82,11 +82,13 @@ void 	init_weight(t_room_list *rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)
 		{
-			rl->weight = get_min(rl->l_rooms);
+			if ((rl->weight = get_min(rl->l_rooms)) == -1)
+				return (1);
 			rl = beg;
 		}
 		rl = rl->next;
 	}
+	return (0);
 }
 
 t_path	*add_path(t_path *path, t_room_list *room)
@@ -110,12 +112,19 @@ t_path	*add_path(t_path *path, t_room_list *room)
 t_path 	*solve_path(t_room_list *rl, t_path *path)
 {
 	t_room_links *links;
+	t_room_list	 *room;
 
 	path = add_path(path, rl);
 	while (last(path)->room->type != END)
 	{
 		links = last(path)->room->l_rooms;
-		path = add_path(path, get_min_addr(links));
+		if ((room = get_min_addr(links)))
+			path = add_path(path, room);
+		else
+		{
+			ft_printf("SOLVE_PATH RETURN NULL");
+			return (NULL);
+		}
 	}
 	return (path);
 }
@@ -138,7 +147,7 @@ t_path	*apply_traffic(t_path *path)
 	beg = path;
 	while (path)
 	{
-		path->room->traffic = 1;
+		path->room->traffic = path->room->type == END ? 0 : 1;
 		path = path->next;
 	}
 	return (beg);
@@ -148,7 +157,9 @@ t_path	*get_path(t_room_list *rl)
 {
 	t_path *path;
 
-	init_weight(rl);
-	path = solve_path(get_start(rl), NULL);
+	if (init_weight(rl))
+		return (NULL);
+	if (!(path = solve_path(get_start(rl), NULL)))
+		return (NULL);
 	return (apply_traffic(path));
 }
