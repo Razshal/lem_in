@@ -100,6 +100,7 @@ t_path	*add_path(t_path *path, t_room_list *room)
 		return (NULL);
 	new->next = NULL;
 	new->room = room;
+	new->length = 0;
     beg = path;
 	if (!path)
 		return (new);
@@ -121,10 +122,7 @@ t_path 	*solve_path(t_room_list *rl, t_path *path)
 		if ((room = get_min_addr(links)))
 			path = add_path(path, room);
 		else
-		{
-			ft_printf("SOLVE_PATH RETURN NULL");
 			return (NULL);
-		}
 	}
 	return (path);
 }
@@ -153,6 +151,11 @@ t_path	*apply_traffic(t_path *path)
 	return (beg);
 }
 
+int		ft_list_size_path(t_path *path)
+{
+	return (!path ? 0 : 1 + ft_list_size_path(path->next));
+}
+
 t_path	*get_path(t_room_list *rl)
 {
 	t_path *path;
@@ -161,5 +164,6 @@ t_path	*get_path(t_room_list *rl)
 		return (NULL);
 	if (!(path = solve_path(get_start(rl), NULL)))
 		return (NULL);
+	path->length = ft_list_size_path(path);
 	return (apply_traffic(path));
 }

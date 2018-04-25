@@ -51,7 +51,7 @@ void	print_path(t_path *path)
 	}
 }
 
-void	attr_lems(t_lem_list *lem, t_room_list *rl)
+void	attr_path(t_lem_list *lem, t_room_list *rl)
 {
 	while (lem)
 	{
@@ -59,6 +59,37 @@ void	attr_lems(t_lem_list *lem, t_room_list *rl)
 		lem->beg_path = lem->path;
 		lem = lem->next;
 	}
+}
+
+int		get_path_nbr(t_lem_list *lem)
+{
+	int 	i;
+
+	i = 0;
+	while (lem)
+	{
+		if (!lem->path)
+			return (i);
+		lem = lem->next;
+		i++;
+	}
+	return (i);
+}
+
+int		ft_list_size_lem(t_lem_list *lem)
+{
+	return (!lem ? 0 : 1 + ft_list_size_lem(lem->next));
+}
+
+void	attr_lems(t_lem_list *lem, t_room_list *rl)
+{
+	int		lem_nbr;
+	int		path_nbr;
+
+	attr_path(lem, rl);
+	lem_nbr = ft_list_size_lem(lem);
+	path_nbr = get_path_nbr(lem);
+	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
 }
 
 void	moove_lems(t_lem_list *lem, t_room_list *rl)

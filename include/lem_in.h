@@ -62,6 +62,7 @@ typedef struct	s_recurse
 typedef struct   s_path
 {
 	t_room_list 	*room;
+	int 			length;
 	struct s_path 	*next;
 }				t_path;
 
