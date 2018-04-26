@@ -6,7 +6,7 @@
 #    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/26 14:39:40 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/26 15:50:30 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_NAME = get_list.c \
 	   del_list.c \
 	   debug.c \
 	   paths.c \
+	   moove_lem.c \
 	   attr_lem.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
