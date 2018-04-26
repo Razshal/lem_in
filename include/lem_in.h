@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 13:35:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:37:09 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_path			*get_path(t_room_list *rl);
 void			moove_lems(t_lem_list *lem, t_room_list *rl);
 int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
+void			free_map(t_map **map);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")
