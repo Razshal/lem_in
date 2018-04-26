@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 15:07:02 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:36:31 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int			init_weight(t_room_list *rl)
 	t_room_list *beg;
 
 	beg = rl;
-	restart_weight(rl);
+	//restart_weight(rl);
 	while (rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attr_lem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 17:00:43 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:13:25 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,6 @@ void    init_path_tab(t_attr_paths **tab, t_lem_list *lem, int lem_nbr, int len)
 	(*tab)[0].lem_nbr = lem_nbr;
 }
 
-void    print_tabss(t_attr_paths *tab, int len, int min)
-{
-    int     i = -1;
-
-	ft_printf("MIN : %d\n", min);
-	while (++i < len)
-    	ft_printf("PATH_LEN : %d | LEM_NBR : %d | TOTAL_LEN : %d\n", tab[i].path_length, tab[i].lem_nbr, tab[i].total_length);
-}
-
 int				get_score(t_attr_paths **tab, int len, int min)
 {
 	int		i;
@@ -70,7 +61,7 @@ int				decal_lem(t_attr_paths **tab, int len)
 	done = 0;
 	while (++i < len - 1)
 	{
-		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr)
+		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr + ((*tab)[i].path->length == (*tab)[i + 1].path->length ? 0 : 1))
 		{
 			(*tab)[i].lem_nbr -= 1;
 			(*tab)[i + 1].lem_nbr += 1;
