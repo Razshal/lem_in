@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 15:33:40 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:33:54 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct	s_room_links
 	struct s_room_links	*next;
 }				t_room_links;
 
+typedef struct	s_coord
+{
+	int x;
+	int y;
+}				t_coord;
+
 struct	s_room_list
 {
 	char				*name;
@@ -37,6 +43,7 @@ struct	s_room_list
 	int 				weight;
 	int 				traffic;
 	int					number_of_links;
+	t_coord				coords;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
 };
@@ -74,7 +81,8 @@ t_room_links	*get_last_item_link(t_room_links *rlink);
 t_lem_list		*get_lem(int lem_num, t_recurse *infos);
 int				add_lem(int lem_num, char *room_name, t_recurse *infos);
 char			*get_start_name(t_room_list *room);
-int				add_room(char *room_name, int room_type, t_recurse *infos);
+int				add_room(char *room_name, int roomtype,
+t_coord coords, t_recurse *infos);
 int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos);

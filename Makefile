@@ -3,17 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/15 19:54:41 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/26 12:37:14 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
 SRC_PATH = src
 SRC_NAME = get_list.c \
-	   get_list2.c \
 	   lem_in.c \
 	   lem_lists.c \
 	   lists.c \

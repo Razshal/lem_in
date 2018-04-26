@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 18:01:45 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:36:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
 	char	**room;
 	char	*room_name;
+	t_coord coords;
 
 	if (ft_count_words(line, ' ') != 3)
 		return (0);
@@ -38,10 +39,12 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 		delete_array(room);
 		return (0);
 	}
+	coords.x = ft_atoi(room[1]);
+	coords.y = ft_atoi(room[2]);
 	free(room[1]);
 	free(room[2]);
 	free(room);
-	return (add_room(room_name, type, infos));
+	return (add_room(room_name, type, coords, infos));
 }
 
 static int	parse_line(t_recurse *infos)

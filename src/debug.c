@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 19:37:51 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:39:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	print_struct(t_recurse *recurse)
 	{
 		linked_rooms = rlist->l_rooms;
 		ft_printf("{BLUE}Room:%s{EOC}\n", rlist->name);
+		ft_printf("{BLUE}Coords: %d %d{EOC}\n", rlist->coords.x, rlist->coords.y);
 
 		if (rlist->type == START)
 			INFO("START");

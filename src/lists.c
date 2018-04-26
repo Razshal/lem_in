@@ -6,13 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 17:09:46 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:34:10 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-t_room_list			*new_room(char *room_name, int room_type)
+static t_room_list	*new_room(char *room_name, int room_type, t_coord coords)
 {
 	t_room_list *rlist;
 
@@ -25,6 +25,7 @@ t_room_list			*new_room(char *room_name, int room_type)
 	rlist->weight = room_type == END ? 0 : -1;
 	rlist->number_of_links = 0;
 	rlist->l_rooms = NULL;
+	rlist->coords = coords;
 	rlist->next = NULL;
 	return (rlist);
 }
@@ -42,16 +43,17 @@ static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 	return (rlink);
 }
 
-int					add_room(char *room_name, int roomtype, t_recurse *infos)
+int					add_room(char *room_name, int roomtype,
+t_coord coords, t_recurse *infos)
 {
 	t_room_list *rlist_local;
 
 	if (!infos->room_list
-			&& !(infos->room_list = new_room(room_name, roomtype)))
+			&& !(infos->room_list = new_room(room_name, roomtype, coords)))
 		return (0);
 	if (!get_room(room_name, infos))
 	{
-		if (!(rlist_local = new_room(room_name, roomtype)))
+		if (!(rlist_local = new_room(room_name, roomtype, coords)))
 			return (0);
 		rlist_local->next = infos->room_list;
 		infos->room_list = rlist_local;
@@ -72,7 +74,7 @@ t_room_links *new_link, t_recurse *infos)
 	room->number_of_links++;
 	return (1);
 }
-//TODO check if free frees 2dim arrays
+
 int					add_link(char *line, t_recurse *infos)
 {
 	char			**rooms;
