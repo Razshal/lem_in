@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 17:20:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:27:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	get_diff_path(t_lem_list *lem, t_room_list *rl)
 	{
 		lem->path = get_path(rl);
 		lem->beg_path = lem->path;
+		print_path(lem->path);
 		lem = lem->next;
 	}
 }
@@ -93,6 +94,7 @@ void	assign_lem(t_lem_list *lem, t_attr_paths *tab)
 		if (tab[i].lem_nbr > 0)
 		{
 			lem->path = tab[i].path;
+			lem->beg_path = tab[i].path;
 			tab[i].lem_nbr -= 1;
 		}
 		lem = lem->next;
