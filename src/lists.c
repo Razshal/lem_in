@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 12:34:10 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:06:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static t_room_list	*new_room(char *room_name, int room_type, t_coord coords)
 
 static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 {
-	t_room_links *rlink;
-	t_room_list *room;
+	t_room_links	*rlink;
+	t_room_list		*room;
 
 	if (!(rlink = (t_room_links*)malloc(sizeof(t_room_links) * 1)) ||
 			!(room = get_room(room_name, infos)))
@@ -58,7 +58,6 @@ t_coord coords, t_recurse *infos)
 		rlist_local->next = infos->room_list;
 		infos->room_list = rlist_local;
 	}
-
 	return (1);
 }
 

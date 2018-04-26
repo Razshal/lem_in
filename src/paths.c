@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 15:00:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:07:02 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ t_room_list	*get_min_addr(t_room_links *links)
 	room = NULL;
 	while (links)
 	{
-		if (links->room->weight != -1 && !links->room->traffic && links->room->weight < min)
+		if (links->room->weight != -1 && !links->room->traffic
+			&& links->room->weight < min)
 		{
 			min = links->room->weight;
 			room = links->room;

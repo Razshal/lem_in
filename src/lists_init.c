@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 13:40:21 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:13:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	lem_init(int lem_amount, t_recurse *infos)
 	}
 	return (infos->lem_list != NULL);
 }
-//TODO: check if second return 0 condition realy frees
+
 static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
 	char	**room;
@@ -55,7 +55,7 @@ static int	parse_line(t_recurse *infos, t_map **map)
 	else if (infos->line[0] == '#' && infos->line[1] != '#')
 		return (1);
 	else if (ft_strchr(infos->line, '-'))
-		return(add_link(infos->line, infos));
+		return (add_link(infos->line, infos));
 	else if (infos->line[0] == '#' && infos->line[1] == '#')
 	{
 		if (!ft_strcmp(infos->line, "##end")
@@ -74,7 +74,6 @@ int			lists_init(t_recurse **infos, t_map **map)
 	(*infos)->lem_list = NULL;
 	(*infos)->room_list = NULL;
 	(*infos)->line = NULL;
-
 	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
 	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))
