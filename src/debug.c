@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 12:39:51 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:48:20 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int print_lem_struct(t_lem_list *list)
 
 void	print_struct(t_recurse *recurse)
 {
-	t_room_list *rlist;
-	t_lem_list *lem_list;
-	t_room_list	*next_room;
-	t_room_links *linked_rooms;
+	t_room_list		*rlist;
+	t_lem_list		*lem_list;
+	t_room_list		*next_room;
+	t_room_links	*linked_rooms;
 
 	if (!(rlist = recurse->room_list)
 		|| !(lem_list = recurse->lem_list)

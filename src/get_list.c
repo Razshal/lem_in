@@ -6,13 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 17:39:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 12:15:39 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:51:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-t_room_list *get_room(char *room_name, t_recurse *infos)
+t_room_list		*get_room(char *room_name, t_recurse *infos)
 {
 	t_room_list *current;
 
@@ -26,7 +26,7 @@ t_room_list *get_room(char *room_name, t_recurse *infos)
 	return (NULL);
 }
 
-t_room_links *get_lroom_pos(t_room_list *room, int link_num)
+t_room_links	*get_lroom_pos(t_room_list *room, int link_num)
 {
 	t_room_links	*link;
 	int				count;
@@ -40,7 +40,7 @@ t_room_links *get_lroom_pos(t_room_list *room, int link_num)
 	return (NULL);
 }
 
-char	*get_start_name(t_room_list *room)
+char			*get_start_name(t_room_list *room)
 {
 	t_room_list *temp;
 
@@ -54,7 +54,7 @@ char	*get_start_name(t_room_list *room)
 	return (NULL);
 }
 
-t_room_list *get_last_item(t_room_list *rlist)
+t_room_list		*get_last_item(t_room_list *rlist)
 {
 	t_room_list *local_rlist;
 
@@ -64,7 +64,7 @@ t_room_list *get_last_item(t_room_list *rlist)
 	return (local_rlist);
 }
 
-t_room_links *get_last_item_link(t_room_links *rlink)
+t_room_links	*get_last_item_link(t_room_links *rlink)
 {
 	t_room_links *local_rlink;
 

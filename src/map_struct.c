@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:15:20 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 13:53:33 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 14:44:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ int display_map(t_map *map)
 
 void free_map(t_map **map)
 {
-    
+    if ((*map)->next)
+        free_map(&(*map)->next);
+    free((*map)->str);
+    free(*map);
 }

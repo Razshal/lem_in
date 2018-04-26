@@ -6,23 +6,23 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 12:08:00 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:00:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-t_path 		*last(t_path *path)
+t_path		*last(t_path *path)
 {
 	while (path->next)
 		path = path->next;
 	return (path);
 }
 
-t_room_list *get_min_addr(t_room_links *links)
+t_room_list	*get_min_addr(t_room_links *links)
 {
-	int 	min;
-	t_room_list *room;
+	int			min;
+	t_room_list	*room;
 
 	min = INTMAX;
 	room = NULL;
@@ -38,7 +38,7 @@ t_room_list *get_min_addr(t_room_links *links)
 	return (room);
 }
 
-int 	get_min(t_room_links *rl)
+int			get_min(t_room_links *rl)
 {
 	int 	min;
 
@@ -52,7 +52,7 @@ int 	get_min(t_room_links *rl)
 	return (min == INTMAX ? -1 : min + 1);
 }
 
-int 	initialized(t_room_links *links)
+int			initialized(t_room_links *links)
 {
 	while (links)
 	{
@@ -63,7 +63,7 @@ int 	initialized(t_room_links *links)
 	return (0);
 }
 
-void 	restart_weight(t_room_list *rl)
+void		restart_weight(t_room_list *rl)
 {
 	while (rl)
 	{
@@ -72,7 +72,7 @@ void 	restart_weight(t_room_list *rl)
 	}
 }
 
-int		init_weight(t_room_list *rl)
+int			init_weight(t_room_list *rl)
 {
 	t_room_list *beg;
 
@@ -91,7 +91,7 @@ int		init_weight(t_room_list *rl)
 	return (0);
 }
 
-t_path	*add_path(t_path *path, t_room_list *room)
+t_path		*add_path(t_path *path, t_room_list *room)
 {
 	t_path	*new;
     t_path  *beg;
@@ -110,7 +110,7 @@ t_path	*add_path(t_path *path, t_room_list *room)
 	return (beg);
 }
 
-t_path 	*solve_path(t_room_list *rl, t_path *path)
+t_path		*solve_path(t_room_list *rl, t_path *path)
 {
 	t_room_links *links;
 	t_room_list	 *room;
@@ -138,7 +138,7 @@ t_room_list	*get_start(t_room_list *rl)
 	return (NULL);
 }
 
-t_path	*apply_traffic(t_path *path)
+t_path		*apply_traffic(t_path *path)
 {
 	t_path	*beg;
 
@@ -151,12 +151,12 @@ t_path	*apply_traffic(t_path *path)
 	return (beg);
 }
 
-int		ft_list_size_path(t_path *path)
+int			ft_list_size_path(t_path *path)
 {
 	return (!path ? 0 : 1 + ft_list_size_path(path->next));
 }
 
-t_path	*get_path(t_room_list *rl)
+t_path		*get_path(t_room_list *rl)
 {
 	t_path *path;
 
