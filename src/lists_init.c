@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 15:13:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:57:25 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,26 @@ static int	parse_line(t_recurse *infos, t_map **map)
 	return (split_and_add_room(infos->line, CLASSICROOM, infos));
 }
 
+static int	check_start_end (t_recurse *infos)
+{
+	t_room_list *look;
+	int			start;
+	int			end;
+
+	look = infos->room_list;
+	start = 0;
+	end = 0;
+	while (look)
+	{
+		if (look->type == END)
+			end = 1;
+		if (look->type == START)
+			start = 1;
+		look = look->next;
+	}
+	return (start && end);
+}
+
 int			lists_init(t_recurse **infos, t_map **map)
 {
 	(*infos)->lem_list = NULL;
@@ -87,7 +107,7 @@ int			lists_init(t_recurse **infos, t_map **map)
 			return (0);
 		}
 	}
-	if (!(*infos)->lem_list || !(*infos)->room_list)
+	if (!(*infos)->lem_list || !(*infos)->room_list || !check_start_end(*infos))
 		return (0);
 	return (1);
 }
