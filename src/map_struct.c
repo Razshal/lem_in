@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.c                                           :+:      :+:    :+:   */
+/*   map_struct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 15:18:04 by mfonteni         ###   ########.fr       */
+/*   Created: 2018/04/26 13:15:20 by mfonteni          #+#    #+#             */
+/*   Updated: 2018/04/26 15:06:15 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-int	main(void)
+int		append_line(char *str, t_map **map)
 {
-	t_recurse	*infos;
-	t_map		*map;
+	t_map *new_line;
 
-	if (!(infos = (t_recurse*)malloc(sizeof(t_recurse) * 1))
-		|| !(map = (t_map*)malloc(sizeof(t_map) * 1)))
+	if (!str || !map || !(new_line = (t_map*)malloc(sizeof(t_map) * 1)))
 		return (0);
-	map->str = NULL;
-	map->next = NULL;
-	if (!lists_init(&infos, &map))
+	new_line->str = str;
+	new_line->next = *map;
+	*map = new_line;
+	return (1);
+}
+
+int		display_map(t_map *map)
+{
+	t_map *local;
+
+	local = map;
+	if (!map)
+		return (0);
+	if (!display_map(map->next))
 	{
-		ft_putstr("ERROR");
+		ft_putendl(map->str);
 		return (0);
 	}
-	display_map(map);
-	print_struct(infos);
-	//solver(infos->room_list);
-	moove_lems(infos->lem_list, infos->room_list);
-	delete_struct(infos);
-	free_map(&map);
+	return (1);
+}
+
+void	free_map(t_map **map)
+{
+	if ((*map)->next)
+		free_map(&(*map)->next);
+	free((*map)->str);
+	free(*map);
 }

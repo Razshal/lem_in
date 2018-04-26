@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 12:36:46 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:13:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	lem_init(int lem_amount, t_recurse *infos)
 	}
 	return (infos->lem_list != NULL);
 }
-//TODO: check if second return 0 condition realy frees
+
 static int	split_and_add_room(char *line, int type, t_recurse *infos)
 {
 	char	**room;
@@ -47,7 +47,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 	return (add_room(room_name, type, coords, infos));
 }
 
-static int	parse_line(t_recurse *infos)
+static int	parse_line(t_recurse *infos, t_map **map)
 {
 	if (!infos->line || !infos->line[0]
 	|| ft_strlen(infos->line) < 2 || infos->line[0] == 'L')
@@ -55,39 +55,38 @@ static int	parse_line(t_recurse *infos)
 	else if (infos->line[0] == '#' && infos->line[1] != '#')
 		return (1);
 	else if (ft_strchr(infos->line, '-'))
-		return(add_link(infos->line, infos));
+		return (add_link(infos->line, infos));
 	else if (infos->line[0] == '#' && infos->line[1] == '#')
 	{
 		if (!ft_strcmp(infos->line, "##end")
-		&& noleaks_get_next_line(0, &infos->line))
+		&& append_line(infos->line, map) && get_next_line(0, &infos->line))
 			return (split_and_add_room(infos->line, END, infos));
 		else if (!ft_strcmp(infos->line, "##start")
-		&& noleaks_get_next_line(0, &infos->line))
+		&& append_line(infos->line, map) && get_next_line(0, &infos->line))
 			return (split_and_add_room(infos->line, START, infos));
 		return (0);
 	}
 	return (split_and_add_room(infos->line, CLASSICROOM, infos));
 }
 
-int			lists_init(t_recurse **infos)
+int			lists_init(t_recurse **infos, t_map **map)
 {
 	(*infos)->lem_list = NULL;
 	(*infos)->room_list = NULL;
 	(*infos)->line = NULL;
-
 	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
 	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))
 		return (0);
-	while (noleaks_get_next_line(0, &(*infos)->line) > 0)
+	while (append_line((*infos)->line, map)
+		&& get_next_line(0, &(*infos)->line) > 0)
 	{
-		if (!parse_line(*infos))
+		if (!parse_line(*infos, map))
 		{
 			ft_memdel((void**)&(*infos)->line);
 			return (0);
 		}
 	}
-	ft_memdel((void**)&(*infos)->line);
 	if (!(*infos)->lem_list || !(*infos)->room_list)
 		return (0);
 	return (1);

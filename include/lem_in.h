@@ -6,7 +6,11 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/04/26 13:32:38 by abouvero         ###   ########.fr       */
+=======
+/*   Updated: 2018/04/26 13:35:23 by mfonteni         ###   ########.fr       */
+>>>>>>> fb856639c3e27518a5eab9103a65ce61c59c3f3e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +35,15 @@ typedef struct	s_room_links
 
 typedef struct	s_coord
 {
-	int x;
-	int y;
+	int					x;
+	int					y;
 }				t_coord;
+
+typedef struct	s_map
+{
+	char				*str;
+	struct s_map		*next;
+}				t_map;
 
 struct	s_room_list
 {
@@ -93,18 +103,20 @@ int				add_room(char *room_name, int roomtype,
 t_coord coords, t_recurse *infos);
 int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
-int				lists_init(t_recurse **infos);
+int				lists_init(t_recurse **infos, t_map **map);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
 t_path			*get_path(t_room_list *rl);
 void			moove_lems(t_lem_list *lem, t_room_list *rl);
 void    		calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
+int				append_line(char *str, t_map **map);
+int				display_map(t_map *map);
 
 //////////////// DEBUG ////////////////////
-#define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")
-#define ERROR(message) ft_printf("{RED}%s{EOC}\n", message)
-#define SUCCESSM(message) ft_printf("{GREEN}%s{EOC}\n", message)
-#define INFO(message) ft_printf("{BLUE}%s{EOC}\n", message)
+#define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")
+#define ERROR(message)		ft_printf("{RED}%s{EOC}\n", message)
+#define SUCCESSM(message)	ft_printf("{GREEN}%s{EOC}\n", message)
+#define INFO(message)		ft_printf("{BLUE}%s{EOC}\n", message)
 #include <stdio.h>
 void print_struct(t_recurse *recurse);
 int print_lem_struct(t_lem_list *list);

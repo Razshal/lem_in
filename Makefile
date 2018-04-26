@@ -6,13 +6,14 @@
 #    By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/26 13:12:37 by abouvero         ###   ########.fr        #
+#    Updated: 2018/04/26 15:30:03 by abouvero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
 SRC_PATH = src
 SRC_NAME = get_list.c \
+	   map_struct.c \
 	   lem_in.c \
 	   lem_lists.c \
 	   lists.c \
