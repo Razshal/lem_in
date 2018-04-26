@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 16:29:52 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:08:45 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		attr_lems(t_lem_list *lem, t_room_list *rl)
 	get_diff_path(lem, rl);
 	lem_nbr = ft_list_size_lem(lem);
 	path_nbr = get_path_nbr(lem);
-	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
+//	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
 	if (!(tab = calc_lems_by_path(lem, lem_nbr, path_nbr)))
 		return (1);
 	assign_lem(lem, tab);
@@ -133,7 +133,6 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	// 	ft_printf("\n");
 	// 	lem = lem->next;
 	// }
-	SUCCESSM("Solution :");
 	while (!all_arrived(beg))
 	{
 		lem = beg;

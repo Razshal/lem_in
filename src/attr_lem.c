@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attr_lem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 16:04:53 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:00:43 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				decal_lem(t_attr_paths **tab, int len)
 	done = 0;
 	while (++i < len - 1)
 	{
-		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr + 1)
+		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr)
 		{
 			(*tab)[i].lem_nbr -= 1;
 			(*tab)[i + 1].lem_nbr += 1;

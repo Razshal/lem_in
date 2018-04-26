@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 15:18:04 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 17:11:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(void)
 		return (0);
 	}
 	display_map(map);
-	print_struct(infos);
+	ft_putchar('\n');
+	//print_struct(infos);
 	//solver(infos->room_list);
 	moove_lems(infos->lem_list, infos->room_list);
 	delete_struct(infos);
