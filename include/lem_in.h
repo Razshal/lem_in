@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 16:04:32 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:25:21 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void			moove_lems(t_lem_list *lem, t_room_list *rl);
 t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
 int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
-void	free_map(t_map **map);
-void 	recfr_path(t_path *path);
+void			free_map(t_map **map);
+void 			recfr_path(t_path *path);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")

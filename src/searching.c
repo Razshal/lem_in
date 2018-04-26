@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   searching.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:48:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/15 13:22:32 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:21:03 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int			is_end_room(char *name, t_recurse *infos)
 
 int			searching(char *start, int link, int moove_c, t_recurse *infos)
 {
-	int res;
-	t_room_list *path;
-	t_room_list *current_room;
+	int			res;
+	t_room_list	*path;
+	t_room_list	*current_room;
 
 	res = INTMAX;
 	current_room = infos->room_list;
