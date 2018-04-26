@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 17:39:17 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 17:09:47 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 12:15:39 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,21 @@ t_room_links *get_lroom_pos(t_room_list *room, int link_num)
 		return (link);
 	return (NULL);
 }
-/*
-t_room_links *get_lroom_by_name(char *name, int rlink_num, t_recurse *infos)
-{
-	t_room_links	*link;
-	int				count;
 
-	link = (get_room(name, infos))->l_rooms;
-	count = 0;
-	while (link)
+char	*get_start_name(t_room_list *room)
+{
+	t_room_list *temp;
+
+	temp = room;
+	while (temp)
 	{
-		if (count == rlink_num)
-			return (link);
-		link = link->next;
-		count++;
+		if (temp->type == START)
+			return (temp->name);
+		temp = temp->next;
 	}
 	return (NULL);
 }
-*/
+
 t_room_list *get_last_item(t_room_list *rlist)
 {
 	t_room_list *local_rlist;
