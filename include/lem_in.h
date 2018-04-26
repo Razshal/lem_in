@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 12:33:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 13:32:38 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,14 @@ typedef struct   s_path
 	struct s_path 	*next;
 }				t_path;
 
+typedef struct	s_attr_paths
+{
+	int				path_length;
+	int				lem_nbr;
+	int 			total_length;
+	struct s_path	*path;
+}				t_attr_paths;
+
 t_room_list		*get_room(char *name, t_recurse *infos);
 t_room_list		*get_last_item(t_room_list *rlist);
 t_room_links	*get_lroom_name(char *name, int link_num, t_room_list *rlist);
@@ -90,6 +98,7 @@ void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
 t_path			*get_path(t_room_list *rl);
 void			moove_lems(t_lem_list *lem, t_room_list *rl);
+void    		calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR ft_printf("{RED}BUGERROR{EOC}\n")

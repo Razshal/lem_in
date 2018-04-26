@@ -1,131 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paths.c                                            :+:      :+:    :+:   */
+/*   attr_lem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 14:24:02 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/16 12:25:01 by abouvero         ###   ########.fr       */
+/*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
+/*   Updated: 2018/04/26 15:26:55 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void 	recfr_path(t_path *path)
+int     decal_lem(t_attr_paths **tab, int len)
 {
-	if (!path)
-		return ;
-	if (path->next)
-		recfr_path(path->next);
-	ft_memdel((void**)&path);
+    int     i;
+    int     done;
+
+    i = -1;
+    done = 0;
+    while (++i < len - 1)
+    {
+        if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr + 1)
+        {
+            i = -1;
+            (*tab)[i].lem_nbr -= 1;
+            (*tab)[i + 1].lem_nbr += 1;
+            done = 1;
+        }
+    }
+    return (done ? 1 : 0);
 }
 
-void 	free_paths(t_lem_list *lem)
+int     get_comb(t_attr_paths *tab, int len, int min)
 {
-	while (lem)
+    int     i;
+
+    i = -1;
+    while (++i < len)
+        tab[i].total_length = tab[i].path_length + tab[i].lem_nbr - 1;
+	while (i >= 0)
 	{
-		recfr_path(lem->beg_path);
-		lem = lem->next;
+		--i;
+		if (tab[i].lem_nbr)
+			break;
 	}
+    if (tab[i].total_length - tab[0].total_length > min)
+        return (-1);
+    else
+        return (tab[i].total_length - tab[0].total_length);
 }
 
-int 	all_arrived(t_lem_list *lem)
+void    init_path_tab(t_attr_paths **tab, t_lem_list *lem, int lem_nbr, int len)
 {
-	while (lem)
-	{
-		if (!lem->arrived)
-			return (0);
-		lem = lem->next;
-	}
-	return (1);
+    int     i;
+
+    i = -1;
+    while (++i < len)
+    {
+        (*tab)[i].path_length = lem->path->length;
+        (*tab)[i].lem_nbr = 0;
+        (*tab)[i].path = lem->path;
+        (*tab)[i].total_length = 0;
+        lem = lem->next;
+    }
+    (*tab)[0].lem_nbr = lem_nbr;
 }
 
-void	print_path(t_path *path)
+void    print_tabss(t_attr_paths *tab, int len, int min)
 {
-	while (path)
-	{
-		ft_printf("%s", path->room->name);
-		path->next ? ft_printf(" -> ") : ft_printf("\n");
-		path = path->next;
-	}
+    int     i = -1;
+
+    ft_printf("MIN : %d\n", min);
+    while (++i < len)
+        ft_printf("PATH_LEN : %d | LEM_NBR : %d | TOTAL_LEN : %d\n", tab[i].path_length, tab[i].lem_nbr, tab[i].total_length);
 }
 
-void	attr_path(t_lem_list *lem, t_room_list *rl)
+void    calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr)
 {
-	while (lem)
-	{
-		lem->path = get_path(rl);
-		lem->beg_path = lem->path;
-		lem = lem->next;
-	}
-}
+    t_attr_paths    *tab;
+    int             min;
 
-int		get_path_nbr(t_lem_list *lem)
-{
-	int 	i;
-
-	i = 0;
-	while (lem)
-	{
-		if (!lem->path)
-			return (i);
-		lem = lem->next;
-		i++;
-	}
-	return (i);
-}
-
-int		ft_list_size_lem(t_lem_list *lem)
-{
-	return (!lem ? 0 : 1 + ft_list_size_lem(lem->next));
-}
-
-void	attr_lems(t_lem_list *lem, t_room_list *rl)
-{
-	int		lem_nbr;
-	int		path_nbr;
-
-	attr_path(lem, rl);
-	lem_nbr = ft_list_size_lem(lem);
-	path_nbr = get_path_nbr(lem);
-	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
-}
-
-void	moove_lems(t_lem_list *lem, t_room_list *rl)
-{
-	t_lem_list *beg;
-
-	beg = lem;
-	attr_lems(lem, rl);
-	while (lem)
-	{
-		ft_printf("%d : ", lem->lem);
-		if (lem->path)
-			print_path(lem->path);
-		else
-			ft_printf("(null)");
-		ft_printf("\n");
-		lem = lem->next;
-	}
-	// SUCCESSM("Solution :");
-	// while (!all_arrived(beg))
-	// {
-	// 	lem = beg;
-	// 	while (lem)
-	// 	{
-	// 		if (!lem->path->next)
-	// 			lem->arrived = 1;
-	// 		else if (!lem->arrived && !lem->path->next->room->occupied)
-	// 		{
-	// 			ft_printf("L%d-%s ", lem->lem, lem->path->next->room->name);
-	// 			lem->path->room->occupied = 0;
-	// 			lem->path = lem->path->next;
-	// 			lem->path->room->occupied = lem->path->next ? 1 : 0;
-	// 		}
-	// 		lem = lem->next;
-	// 	}
-	// 	ft_printf("\n");
-	// }
-	// free_paths(beg);
+    min = INTMAX;
+    if (!(tab = (t_attr_paths*)malloc(sizeof(t_attr_paths) * path_nbr)))
+        return ;
+    init_path_tab(&tab, lem, lem_nbr, path_nbr);
+    while ((min = get_comb(tab, path_nbr, min)) != -1)
+    {
+        print_tabss(tab,path_nbr, min);
+        //ft_printf("MIN : %d\n", min);
+        if (!decal_lem(&tab, path_nbr))
+            break;
+    }
+    //free_tab();
 }

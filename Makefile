@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
+#    By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/26 12:37:14 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/26 13:12:37 by abouvero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_NAME = get_list.c \
 	   del_list.c \
 	   debug.c \
 	   paths.c \
+	   moove_lem.c \
 	   attr_lem.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj
