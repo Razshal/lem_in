@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:52:50 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:56:14 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	get_diff_path(lem, rl);
 	lem_nbr = ft_list_size_lem(lem);
 	path_nbr = get_path_nbr(lem);
-//	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
+	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
 	if (!(tab = calc_lems_by_path(lem, lem_nbr, path_nbr)))
 		return (NULL);
 	assign_lem(lem, tab);
