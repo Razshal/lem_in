@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:13:25 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:47:28 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int len)
 		}
 	//INFO("CALC_LEM DONE");
 	//print_tabss(tab, len, min);
-	free_unused_paths(tab, len);
+	//free_unused_paths(tab, len);
     return (tab);
 }

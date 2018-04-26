@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:12:57 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:52:50 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@ void 	recfr_path(t_path *path)
 	ft_memdel((void**)&path);
 }
 
-void 	free_paths(t_lem_list *lem)
+// void 	free_paths(t_lem_list *lem)
+// {
+// 	while (lem)
+// 	{
+// 		recfr_path(lem->beg_path);
+// 		lem = lem->next;
+// 	}
+// }
+
+void		free_paths(t_attr_paths *tab, int len)
 {
-	while (lem)
-	{
-		recfr_path(lem->beg_path);
-		lem = lem->next;
-	}
+	int		i;
+
+	i = -1;
+	while (++i < len)
+		ft_memdel((void**)&tab[i].path);
 }
 
 int 	all_arrived(t_lem_list *lem)
@@ -101,7 +110,7 @@ void	assign_lem(t_lem_list *lem, t_attr_paths *tab)
 	}
 }
 
-int		attr_lems(t_lem_list *lem, t_room_list *rl)
+t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 {
 	int				lem_nbr;
 	int				path_nbr;
@@ -112,18 +121,21 @@ int		attr_lems(t_lem_list *lem, t_room_list *rl)
 	path_nbr = get_path_nbr(lem);
 //	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
 	if (!(tab = calc_lems_by_path(lem, lem_nbr, path_nbr)))
-		return (1);
+		return (NULL);
 	assign_lem(lem, tab);
-	ft_memdel((void**)&tab);
-	return (0);
+	//ft_memdel((void**)&tab);
+	*len = path_nbr;
+	return (tab);
 }
 
 void	moove_lems(t_lem_list *lem, t_room_list *rl)
 {
-	t_lem_list *beg;
+	t_lem_list		*beg;
+	t_attr_paths	*tab;
+	int				len;
 
 	beg = lem;
-	if (attr_lems(lem, rl))
+	if (!(tab = attr_lems(lem, rl, &len)))
 		return ;
 	// while (lem)
 	// {
@@ -153,5 +165,7 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 		}
 		ft_printf("\n");
 	}
-	free_paths(beg);
+	free_paths(tab, len);
+	ft_memdel((void**)&tab);
+	//free_paths(beg);
 }
