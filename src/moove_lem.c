@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 16:15:00 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:29:52 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,16 +123,16 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	beg = lem;
 	if (attr_lems(lem, rl))
 		return ;
-	while (lem)
-	{
-		ft_printf("%d : ", lem->lem);
-		if (lem->path)
-			print_path(lem->path);
-		else
-			ft_printf("(null)");
-		ft_printf("\n");
-		lem = lem->next;
-	}
+	// while (lem)
+	// {
+	// 	ft_printf("%d : ", lem->lem);
+	// 	if (lem->path)
+	// 		print_path(lem->path);
+	// 	else
+	// 		ft_printf("(null)");
+	// 	ft_printf("\n");
+	// 	lem = lem->next;
+	// }
 	SUCCESSM("Solution :");
 	while (!all_arrived(beg))
 	{
@@ -152,5 +152,5 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 		}
 		ft_printf("\n");
 	}
-	// free_paths(beg);
+	free_paths(beg);
 }
