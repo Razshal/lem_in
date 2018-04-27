@@ -6,21 +6,21 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 14:57:26 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:35:28 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void		delete_array(char **array)
+void		delete_array(char ***array)
 {
 	int count;
 
 	count = 0;
-	if (array)
-		while (array[count])
-			free(array[count++]);
-	free(array);
+	if (*array)
+		while (*array[count])
+			free(*array[count++]);
+	free(*array);
 }
 
 static void	free_rl_links(t_room_links *rl_l)
