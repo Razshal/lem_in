@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 15:24:01 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:33:53 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ int			lists_init(t_recurse **infos, t_map **map)
 	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
 	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))
+	{
+		ft_memdel((void**)&((*infos)->line));
 		return (0);
+	}
 	while (append_line((*infos)->line, map)
 		&& get_next_line(0, &(*infos)->line) > 0)
 	{
