@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 15:23:09 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:48:50 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void			free_map(t_map **map);
 void			recfr_path(t_path **path);
 
 //////////////// DEBUG ////////////////////
+void			print_path(t_path *path);
 #define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")
 #define ERROR(message)		ft_printf("{RED}%s{EOC}\n", message)
 #define SUCCESSM(message)	ft_printf("{GREEN}%s{EOC}\n", message)
