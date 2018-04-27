@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 15:09:25 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 13:35:28 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:22:59 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	free_rl_links(t_room_links *rl_l)
 
 static void	free_rl(t_room_list *rl)
 {
+	if (!rl)
+		return ;
 	if (rl->next)
 		free_rl(rl->next);
 	free_rl_links(rl->l_rooms);
@@ -43,17 +45,20 @@ static void	free_rl(t_room_list *rl)
 
 static void	free_lems(t_lem_list *lems)
 {
+	if (!lems)
+		return ;
 	if (lems->next)
 		free_lems(lems->next);
 	ft_memdel((void**)&lems->room);
 	ft_memdel((void**)&lems);
 }
 
-int			delete_struct(t_recurse *rec)
+void		delete_struct(t_recurse *rec)
 {
+	if (!rec)
+		return ;
 	if (rec->lem_list)
 		free_lems(rec->lem_list);
 	free_rl(rec->room_list);
 	ft_memdel((void**)&rec);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 14:30:20 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:24:01 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	parse_line(t_recurse *infos, t_map **map)
 
 static int	check_start_end(t_recurse *infos)
 {
-	t_room_list *look;
+	t_room_list	*look;
 	int			start;
 	int			end;
 
@@ -91,9 +91,6 @@ static int	check_start_end(t_recurse *infos)
 
 int			lists_init(t_recurse **infos, t_map **map)
 {
-	(*infos)->lem_list = NULL;
-	(*infos)->room_list = NULL;
-	(*infos)->line = NULL;
 	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
 	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))

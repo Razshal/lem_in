@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:15:20 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 12:10:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:58:49 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ int		display_map(t_map *map)
 	local = map;
 	if (!map)
 		return (0);
-	if (!display_map(map->next))
-	{
-		ft_putendl(map->str);
-		return (0);
-	}
+	if (map->next)
+		display_map(map->next);
+	ft_putendl(map->str);
 	return (1);
 }
 

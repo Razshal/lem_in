@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 14:32:29 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:23:09 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos, t_map **map);
 void			delete_array(char ***array);
-int				delete_struct(t_recurse *infos);
+void			delete_struct(t_recurse *infos);
 t_path			*get_path(t_room_list *rl);
 int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map);
 t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);

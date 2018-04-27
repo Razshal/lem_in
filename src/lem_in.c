@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 14:30:29 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:17:09 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ int	main(void)
 		return (0);
 	map->str = NULL;
 	map->next = NULL;
-	if (!lists_init(&infos, &map) || !moove_lems(infos->lem_list, infos->room_list, map))
+	infos->lem_list = NULL;
+	infos->room_list = NULL;
+	infos->line = NULL;
+	if (!lists_init(&infos, &map)
+	|| !moove_lems(infos->lem_list, infos->room_list, map))
 	{
 		ft_putstr("ERROR");
+		delete_struct(infos);
+		free_map(&map);
 		return (0);
 	}
 	//print_struct(infos);
