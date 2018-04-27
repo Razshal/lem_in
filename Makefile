@@ -6,7 +6,7 @@
 #    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/26 18:27:34 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/27 12:07:13 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,6 @@ SRC_NAME = get_list.c \
 	   lem_in.c \
 	   lem_lists.c \
 	   lists.c \
-	   searching.c \
-	   lem_checks.c \
 	   lists_init.c \
 	   del_list.c \
 	   debug.c \

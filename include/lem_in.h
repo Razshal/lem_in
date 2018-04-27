@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 11:46:16 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:21:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-# define SUCCESS -1
 # define START -10
 # define END -20
 # define CLASSICROOM -30
 # define INTMAX 2147483647
-# define FAILURE INTMAX
 
-typedef struct	s_room_list t_room_list;
+typedef struct s_room_list	t_room_list;
 
 typedef struct	s_room_links
 {
@@ -39,9 +37,9 @@ struct	s_room_list
 {
 	char				*name;
 	int					type;
-	int 				occupied;
-	int 				weight;
-	int 				traffic;
+	int					occupied;
+	int					weight;
+	int					traffic;
 	int					number_of_links;
 	struct s_room_links	*l_rooms;
 	struct s_room_list	*next;
@@ -52,8 +50,8 @@ typedef struct	s_lem_list
 	int					lem;
 	char				*room;
 	int 				arrived;
-	struct s_path 		*path;
-	struct s_path 		*beg_path;
+	struct s_path		*path;
+	struct s_path		*beg_path;
 	struct s_lem_list	*next;
 }				t_lem_list;
 
@@ -65,29 +63,24 @@ typedef struct	s_recurse
 	char		*line;
 }				t_recurse;
 
-typedef struct   s_path
+typedef struct	s_path
 {
-	t_room_list 	*room;
-	int 			length;
-	struct s_path 	*next;
+	t_room_list		*room;
+	int				length;
+	struct s_path	*next;
 }				t_path;
 
 typedef struct	s_attr_paths
 {
 	int				path_length;
 	int				lem_nbr;
-	int 			total_length;
+	int				total_length;
 	struct s_path	*path;
 }				t_attr_paths;
 
 t_room_list		*get_room(char *name, t_recurse *infos);
-t_room_list		*get_last_item(t_room_list *rlist);
-t_room_links	*get_lroom_name(char *name, int link_num, t_room_list *rlist);
-t_room_links	*get_lroom_pos(t_room_list *room, int link_num);
-t_room_links	*get_last_item_link(t_room_links *rlink);
 t_lem_list		*get_lem(int lem_num, t_recurse *infos);
 int				add_lem(int lem_num, char *room_name, t_recurse *infos);
-char			*get_start_name(t_room_list *room);
 int				add_room(char *room_name, int roomtype, t_recurse *infos);
 int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
@@ -100,7 +93,7 @@ t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
 int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
 void			free_map(t_map **map);
-void 			recfr_path(t_path **path);
+void			recfr_path(t_path **path);
 
 //////////////// DEBUG ////////////////////
 #define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")

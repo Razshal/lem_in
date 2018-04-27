@@ -6,14 +6,14 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:55:23 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/16 14:49:31 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 12:19:49 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "includes/libft.h"
 
-int			ft_count_words(char const *s, char separator)
+int				ft_count_words(char const *s, char separator)
 {
 	int count;
 	int wordcount;
