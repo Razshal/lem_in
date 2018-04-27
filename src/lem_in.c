@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 13:21:27 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:30:29 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,13 @@ int	main(void)
 		return (0);
 	map->str = NULL;
 	map->next = NULL;
-	if (!lists_init(&infos, &map))
+	if (!lists_init(&infos, &map) || !moove_lems(infos->lem_list, infos->room_list, map))
 	{
 		ft_putstr("ERROR");
 		return (0);
 	}
-	display_map(map);
-	ft_putchar('\n');
 	//print_struct(infos);
 	//solver(infos->room_list);
-	moove_lems(infos->lem_list, infos->room_list);
 	delete_struct(infos);
 	free_map(&map);
 }

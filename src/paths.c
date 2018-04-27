@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 13:19:44 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:29:58 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_path		*get_path(t_room_list *rl)
 
 	//RAJOUTER SI PAS DE PATH
 	//REGLER LE RETUR ARRIERE SUR DEALAGE DE LEM
+	//REGLER LEAK SUR LES PATHS NON VALIDE
 
 	if (init_weight(rl))
 		return (NULL);

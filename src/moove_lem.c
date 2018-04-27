@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 12:58:04 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:28:34 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,21 @@ void	print_path(t_path *path)
 	}
 }
 
-void	get_diff_path(t_lem_list *lem, t_room_list *rl)
+int		get_diff_path(t_lem_list *lem, t_room_list *rl)
 {
+	int		done;
+
+	done = 0;
 	while (lem)
 	{
 		lem->path = get_path(rl);
+		if (lem->path)
+			done = 1;
 		lem->beg_path = lem->path;
 		print_path(lem->path);
 		lem = lem->next;
 	}
+	return (done);
 }
 
 int		get_path_nbr(t_lem_list *lem)
@@ -116,7 +122,8 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	int				path_nbr;
 	t_attr_paths	*tab;
 
-	get_diff_path(lem, rl);
+	if (!get_diff_path(lem, rl))
+		return (NULL);
 	lem_nbr = ft_list_size_lem(lem);
 	path_nbr = get_path_nbr(lem);
 	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
@@ -128,7 +135,7 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	return (tab);
 }
 
-void	moove_lems(t_lem_list *lem, t_room_list *rl)
+int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 {
 	t_lem_list		*beg;
 	t_attr_paths	*tab;
@@ -136,7 +143,7 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 
 	beg = lem;
 	if (!(tab = attr_lems(lem, rl, &len)))
-		return ;
+		return (0);
 	// while (lem)
 	// {
 	// 	ft_printf("%d : ", lem->lem);
@@ -147,6 +154,8 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	// 	ft_printf("\n");
 	// 	lem = lem->next;
 	// }
+	display_map(map);
+	ft_putchar('\n');
 	while (!all_arrived(beg))
 	{
 		lem = beg;
@@ -167,5 +176,6 @@ void	moove_lems(t_lem_list *lem, t_room_list *rl)
 	}
 	free_paths(tab, len);
 	ft_memdel((void**)&tab);
+	return (1);
 	//free_paths(beg);
 }
