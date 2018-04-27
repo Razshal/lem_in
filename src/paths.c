@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 16:07:22 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:05:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			initialized(t_room_links *links)
 {
 	while (links)
 	{
-		if (links->room->weight != -1)
+		if (links->room->weight != -1 && !links->room->traffic)
 			return (1);
 		links = links->next;
 	}
@@ -68,8 +68,11 @@ void		restart_weight(t_room_list *rl)
 {
 	while (rl)
 	{
-		rl->weight = rl->type == END ? 0 : -1;
-		rl = rl->next;
+		//if (!rl->traffic)
+		//{
+			rl->weight = rl->type == END ? 0 : -1;
+			rl = rl->next;
+		//}
 	}
 }
 
@@ -78,7 +81,7 @@ int			init_weight(t_room_list *rl)
 	t_room_list *beg;
 
 	beg = rl;
-	restart_weight(rl);
+	restart_weight(rl); //FONCTION MYSTERIEUSE
 	while (rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)
@@ -97,6 +100,7 @@ t_path		*add_path(t_path *path, t_room_list *room)
 	t_path	*new;
     t_path  *beg;
 
+	room->traffic = room->type == END ? 0 : 1;
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		return (NULL);
 	new->next = NULL;
@@ -166,12 +170,14 @@ t_path		*get_path(t_room_list *rl)
 
 	//REGLER LE RETUR ARRIERE SUR DEALAGE DE LEM
 	//REGLER LEAK SUR LES PATHS NON VALIDE
-	//BIG NOT RESPONDING
+	//BIG NOT RESPONDING (PEUT ETRE LA TAILLE DU CHEMIN)
+	//GERER L'OUTPUT (espace et \n en trop)
 
 	if (init_weight(rl))
 		return (NULL);
 	if (!(path = solve_path(get_start(rl), NULL)))
 		return (NULL);
 	path->length = ft_list_size_path(path);
-	return (apply_traffic(path));
+	//return (apply_traffic(path));
+	return (path);
 }
