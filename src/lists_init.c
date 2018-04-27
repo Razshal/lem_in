@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 15:33:53 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:52:48 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	split_and_add_room(char *line, int type, t_recurse *infos)
 static int	parse_line(t_recurse *infos, t_map **map)
 {
 	if (!infos->line || !infos->line[0]
-	|| ft_strlen(infos->line) < 2 || infos->line[0] == 'L')
+	|| ft_strlen(infos->line) < 1 || infos->line[0] == 'L')
 		return (0);
 	else if (infos->line[0] == '#' && infos->line[1] != '#')
 		return (1);

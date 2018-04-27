@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 14:35:42 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 16:07:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			get_min(t_room_links *rl)
 	min = INTMAX;
 	while (rl)
 	{
-		if (rl->room->weight != -1 /*&& !rl->room->traffic*/)
+		if (rl->room->weight != -1 && !rl->room->traffic)
 			min = rl->room->weight < min ? rl->room->weight : min;
 		rl = rl->next;
 	}

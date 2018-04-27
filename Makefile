@@ -6,7 +6,7 @@
 #    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/27 15:27:31 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/27 16:03:04 by mfonteni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CPPFLAGS = -Iinclude
 LIBFT = libft/libft.a
 LIBDIR = libft
 CC = gcc
-CFLAGS = -Werror -Wall -Wextra #-fsanitize=address -g3
+CFLAGS = -Werror -Wall -Wextra -fsanitize=address -g3
 
 INC_PATH = include
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
