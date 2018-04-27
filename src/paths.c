@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:27:05 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:19:44 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			get_min(t_room_links *rl)
 	min = INTMAX;
 	while (rl)
 	{
-		if (rl->room->weight != -1 && !rl->room->traffic)
+		if (rl->room->weight != -1 /*&& !rl->room->traffic*/)
 			min = rl->room->weight < min ? rl->room->weight : min;
 		rl = rl->next;
 	}
@@ -78,7 +78,7 @@ int			init_weight(t_room_list *rl)
 	t_room_list *beg;
 
 	beg = rl;
-	//restart_weight(rl);
+	restart_weight(rl);
 	while (rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)
@@ -160,6 +160,9 @@ int			ft_list_size_path(t_path *path)
 t_path		*get_path(t_room_list *rl)
 {
 	t_path *path;
+
+	//RAJOUTER SI PAS DE PATH
+	//REGLER LE RETUR ARRIERE SUR DEALAGE DE LEM
 
 	if (init_weight(rl))
 		return (NULL);
