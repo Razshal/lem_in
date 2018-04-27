@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 16:51:52 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 14:48:20 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:47:46 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,13 @@ void	print_struct(t_recurse *recurse)
 	{
 		linked_rooms = rlist->l_rooms;
 		ft_printf("{BLUE}Room:%s{EOC}\n", rlist->name);
-		ft_printf("{BLUE}Coords: %d %d{EOC}\n", rlist->coords.x, rlist->coords.y);
-
 		if (rlist->type == START)
 			INFO("START");
 		else if (rlist->type == END)
 			INFO("END");
 		else if (rlist->type == CLASSICROOM)
 			INFO("CLASSICROOM");
-
 		ft_printf("{BLUE}Number of links:%d{EOC}\n", rlist->number_of_links);
-
 		INFO("Linked to :");
 		while (linked_rooms)
 		{

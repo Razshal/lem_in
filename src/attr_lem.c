@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:27:01 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:33:57 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_unused_paths(t_attr_paths *tab, int len)
 	i = -1;
 	while (++i <len)
 		if (!tab[i].lem_nbr)
-			recfr_path(tab[i].path);
+			recfr_path(&(tab[i].path));
 }
 
 void    init_path_tab(t_attr_paths **tab, t_lem_list *lem, int lem_nbr, int len)

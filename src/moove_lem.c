@@ -6,26 +6,26 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/26 18:27:03 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/26 18:34:52 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void 	recfr_path(t_path *path)
+void 	recfr_path(t_path **path)
 {
-	if (!path)
+	if (!*path)
 		return ;
-	if (path->next)
-		recfr_path(path->next);
-	ft_memdel((void**)&path);
+	if ((*path)->next)
+		recfr_path(&(*path)->next);
+	ft_memdel((void**)path);
 }
 
 void 	free_paths(t_lem_list *lem)
 {
 	while (lem)
 	{
-		recfr_path(lem->beg_path);
+		recfr_path(&lem->beg_path);
 		lem = lem->next;
 	}
 }

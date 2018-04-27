@@ -6,13 +6,13 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:13:51 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/26 15:06:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 11:46:40 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-static t_room_list	*new_room(char *room_name, int room_type, t_coord coords)
+static t_room_list	*new_room(char *room_name, int room_type)
 {
 	t_room_list *rlist;
 
@@ -25,7 +25,6 @@ static t_room_list	*new_room(char *room_name, int room_type, t_coord coords)
 	rlist->weight = room_type == END ? 0 : -1;
 	rlist->number_of_links = 0;
 	rlist->l_rooms = NULL;
-	rlist->coords = coords;
 	rlist->next = NULL;
 	return (rlist);
 }
@@ -43,17 +42,16 @@ static t_room_links	*new_room_link(char *room_name, t_recurse *infos)
 	return (rlink);
 }
 
-int					add_room(char *room_name, int roomtype,
-t_coord coords, t_recurse *infos)
+int					add_room(char *room_name, int roomtype, t_recurse *infos)
 {
 	t_room_list *rlist_local;
 
 	if (!infos->room_list
-			&& !(infos->room_list = new_room(room_name, roomtype, coords)))
+			&& !(infos->room_list = new_room(room_name, roomtype)))
 		return (0);
 	if (!get_room(room_name, infos))
 	{
-		if (!(rlist_local = new_room(room_name, roomtype, coords)))
+		if (!(rlist_local = new_room(room_name, roomtype)))
 			return (0);
 		rlist_local->next = infos->room_list;
 		infos->room_list = rlist_local;
