@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 13:23:40 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:28:42 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int				lists_init(t_recurse **infos, t_map **map);
 void			delete_array(char **array);
 int				delete_struct(t_recurse *infos);
 t_path			*get_path(t_room_list *rl);
-void			moove_lems(t_lem_list *lem, t_room_list *rl);
+int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map);
 t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
 int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
