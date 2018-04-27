@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 13:29:58 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:35:42 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ t_path		*solve_path(t_room_list *rl, t_path *path)
 		if ((room = get_min_addr(links)))
 			path = add_path(path, room);
 		else
+		{
+			recfr_path(&path);
 			return (NULL);
+		}
 	}
 	return (path);
 }
@@ -161,9 +164,9 @@ t_path		*get_path(t_room_list *rl)
 {
 	t_path *path;
 
-	//RAJOUTER SI PAS DE PATH
 	//REGLER LE RETUR ARRIERE SUR DEALAGE DE LEM
 	//REGLER LEAK SUR LES PATHS NON VALIDE
+	//BIG NOT RESPONDING
 
 	if (init_weight(rl))
 		return (NULL);
