@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 17:37:42 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 15:17:09 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/29 15:26:26 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(void)
 	if (!lists_init(&infos, &map)
 	|| !moove_lems(infos->lem_list, infos->room_list, map))
 	{
-		ft_putstr("ERROR");
+		ft_putstr("ERROR\n");
 		delete_struct(infos);
 		free_map(&map);
 		return (0);

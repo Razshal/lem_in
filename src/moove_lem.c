@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/29 14:21:51 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/29 15:32:17 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		free_paths(t_attr_paths *tab, int len)
 	int		i;
 
 	i = -1;
-	while (++i < len + 1)
+	while (++i < len)
 		recfr_path(tab[i].path);
 }
 
@@ -70,7 +70,7 @@ int		get_diff_path(t_lem_list *lem, t_room_list *rl)
 		lem->path = get_path(rl);
 		if (lem->path)
 			done = 1;
-		print_path(lem->path);
+		//print_path(lem->path);
 		lem = lem->next;
 	}
 	return (done);
@@ -124,7 +124,7 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 		return (NULL);
 	lem_nbr = ft_list_size_lem(lem);
 	path_nbr = get_path_nbr(lem);
-	ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
+	//ft_printf("nbr chemin : %d | nbr lem : %d | taille : %d\n", path_nbr, lem_nbr, lem->path->length);
 	if (!(tab = calc_lems_by_path(lem, lem_nbr, path_nbr)))
 		return (NULL);
 	assign_lem(lem, tab);
@@ -170,10 +170,10 @@ int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 			}
 			lem = lem->next;
 		}
-		ft_printf("\n");
+		if (!all_arrived(beg))
+			ft_printf("\n");
 	}
 	free_paths(tab, len);
 	ft_memdel((void**)&tab);
 	return (1);
-	//free_paths(beg);
 }

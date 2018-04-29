@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+         #
+#    By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/27 17:20:18 by mfonteni         ###   ########.fr        #
+#    Updated: 2018/04/29 17:51:24 by abouvero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in
+NAME = ./lem-in
 SRC_PATH = src
 SRC_NAME = get_list.c \
 	   map_struct.c \
