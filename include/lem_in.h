@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 16:48:50 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/29 13:54:00 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct	s_lem_list
 	char				*room;
 	int 				arrived;
 	struct s_path		*path;
-	struct s_path		*beg_path;
 	struct s_lem_list	*next;
 }				t_lem_list;
 
@@ -93,7 +92,7 @@ t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int path_nbr);
 int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
 void			free_map(t_map **map);
-void			recfr_path(t_path **path);
+void			recfr_path(t_path *path);
 
 //////////////// DEBUG ////////////////////
 void			print_path(t_path *path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_lists.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:57:38 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/14 17:23:01 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/04/29 14:21:20 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static t_lem_list	*new_lem(int lem_num, char *room_name)
 	llist->room = room_name;
 	llist->arrived = 0;
 	llist->path = NULL;
-	llist->beg_path = NULL;
 	llist->next = NULL;
 	return (llist);
 }

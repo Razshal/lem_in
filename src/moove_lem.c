@@ -6,19 +6,19 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 17:02:55 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/29 14:21:51 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void 	recfr_path(t_path **path)
+void 	recfr_path(t_path *path)
 {
-	if (!*path)
+	if (!path)
 		return ;
-	if ((*path)->next)
-		recfr_path(&(*path)->next);
-	ft_memdel((void**)path);
+	if ((path)->next)
+		recfr_path(path->next);
+	ft_memdel((void**)&path);
 }
 
 // void 	free_paths(t_lem_list *lem)
@@ -35,8 +35,8 @@ void		free_paths(t_attr_paths *tab, int len)
 	int		i;
 
 	i = -1;
-	while (++i < len)
-		ft_memdel((void**)&tab[i].path);
+	while (++i < len + 1)
+		recfr_path(tab[i].path);
 }
 
 int 	all_arrived(t_lem_list *lem)
@@ -70,7 +70,6 @@ int		get_diff_path(t_lem_list *lem, t_room_list *rl)
 		lem->path = get_path(rl);
 		if (lem->path)
 			done = 1;
-		lem->beg_path = lem->path;
 		print_path(lem->path);
 		lem = lem->next;
 	}
@@ -109,7 +108,6 @@ void	assign_lem(t_lem_list *lem, t_attr_paths *tab)
 		if (tab[i].lem_nbr > 0)
 		{
 			lem->path = tab[i].path;
-			lem->beg_path = tab[i].path;
 			tab[i].lem_nbr -= 1;
 		}
 		lem = lem->next;

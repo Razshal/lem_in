@@ -6,21 +6,21 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/27 13:26:44 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/29 13:50:46 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void			free_unused_paths(t_attr_paths *tab, int len)
-{
-	int		i;
+// void			free_unused_paths(t_attr_paths *tab, int len)
+// {
+// 	int		i;
 
-	i = -1;
-	while (++i <len)
-		if (!tab[i].lem_nbr)
-			recfr_path(&(tab[i].path));
-}
+// 	i = -1;
+// 	while (++i <len)
+// 		if (!tab[i].lem_nbr)
+// 			recfr_path(&(tab[i].path));
+// }
 
 void			init_path_tab(t_attr_paths **tab,
 t_lem_list *lem, int lem_nbr, int len)
