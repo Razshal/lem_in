@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/29 15:32:17 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/30 12:51:04 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,16 +142,6 @@ int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 	beg = lem;
 	if (!(tab = attr_lems(lem, rl, &len)))
 		return (0);
-	// while (lem)
-	// {
-	// 	ft_printf("%d : ", lem->lem);
-	// 	if (lem->path)
-	// 		print_path(lem->path);
-	// 	else
-	// 		ft_printf("(null)");
-	// 	ft_printf("\n");
-	// 	lem = lem->next;
-	// }
 	display_map(map);
 	ft_putchar('\n');
 	while (!all_arrived(beg))
@@ -159,19 +149,20 @@ int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 		lem = beg;
 		while (lem)
 		{
-			if (!lem->path->next)
-				lem->arrived = 1;
-			else if (!lem->arrived && !lem->path->next->room->occupied)
+			lem->arrived = !lem->path->next;
+			if (!lem->arrived && !lem->path->next->room->occupied)
 			{
-				ft_printf("L%d-%s ", lem->lem, lem->path->next->room->name);
+				ft_printf("L%d-%s", lem->lem, lem->path->next->room->name);
 				lem->path->room->occupied = 0;
 				lem->path = lem->path->next;
 				lem->path->room->occupied = lem->path->next ? 1 : 0;
+				lem->arrived = !lem->path->next;
+				if (lem->next && !lem->next->arrived && !all_arrived(beg))
+					ft_putchar(' ');
 			}
 			lem = lem->next;
 		}
-		if (!all_arrived(beg))
-			ft_printf("\n");
+		ft_printf("\n");
 	}
 	free_paths(tab, len);
 	ft_memdel((void**)&tab);

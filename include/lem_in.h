@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/29 13:54:00 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/04/30 12:25:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int				add_room(char *room_name, int roomtype, t_recurse *infos);
 int				add_link(char *line, t_recurse *infos);
 int				is_end_room(char *room_name, t_recurse *infos);
 int				lists_init(t_recurse **infos, t_map **map);
-void			delete_array(char ***array);
 void			delete_struct(t_recurse *infos);
 t_path			*get_path(t_room_list *rl);
 int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map);
