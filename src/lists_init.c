@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/05/02 16:12:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:20:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,12 @@ int			lists_init(t_recurse **infos, t_map **map)
 {
 	if (get_next_line(0, &(*infos)->line) < 1)
 		return (0);
+	while ((*infos)->line && (((*infos)->line[0] == '#'
+	&& (*infos)->line[1] != '#') || (((*infos)->line[0] == '#'
+	&& (*infos)->line[1] == '#') && ft_strcmp((*infos)->line, "##start")
+	&& ft_strcmp((*infos)->line, "##end"))) && append_line((*infos)->line, map)
+	&& get_next_line(0, &(*infos)->line) > 0)
+		;
 	if (!(*infos)->line || !lem_init(ft_atoi((*infos)->line), *infos))
 	{
 		ft_memdel((void**)&((*infos)->line));
@@ -100,13 +106,11 @@ int			lists_init(t_recurse **infos, t_map **map)
 	}
 	while (append_line((*infos)->line, map)
 		&& get_next_line(0, &(*infos)->line) > 0)
-	{
 		if (!parse_line(*infos, map))
 		{
 			ft_memdel((void**)&(*infos)->line);
 			return (0);
 		}
-	}
 	if (!(*infos)->lem_list || !(*infos)->room_list || !check_start_end(*infos))
 		return (0);
 	return (1);

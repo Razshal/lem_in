@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 17:06:48 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:24:47 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void			print_and_moove(t_lem_list *lem)
 	}
 }
 
-int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
+int					moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 {
 	t_lem_list		*beg;
 	t_attr_paths	*tab;
