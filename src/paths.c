@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   paths.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 16:50:57 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:02:10 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-int				init_weight(t_room_list *rl)
+static int				init_weight(t_room_list *rl)
 {
 	t_room_list *beg;
 
@@ -31,7 +31,7 @@ int				init_weight(t_room_list *rl)
 	return (0);
 }
 
-t_path			*add_path(t_path *path, t_room_list *room)
+static t_path			*add_path(t_path *path, t_room_list *room)
 {
 	t_path *new;
 	t_path *beg;
@@ -73,7 +73,7 @@ static t_path	*solve_path(t_room_list *rl)
 	return (path);
 }
 
-int				ft_list_size_path(t_path *path)
+static int		ft_list_size_path(t_path *path)
 {
 	return (!path ? 0 : 1 + ft_list_size_path(path->next));
 }

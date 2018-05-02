@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   attr_lem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:29:54 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 17:03:03 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void			init_path_tab(t_attr_paths **tab,
+static void			init_path_tab(t_attr_paths **tab,
 t_lem_list *lem, int lem_nbr, int len)
 {
 	int		i;
@@ -29,7 +29,7 @@ t_lem_list *lem, int lem_nbr, int len)
 	(*tab)[0].lem_nbr = lem_nbr;
 }
 
-int				get_score(t_attr_paths **tab, int len, int min)
+static int			get_score(t_attr_paths **tab, int len, int min)
 {
 	int		i;
 	int		score;
@@ -41,7 +41,7 @@ int				get_score(t_attr_paths **tab, int len, int min)
 	return (i - 1 < len || score < min ? score : -1);
 }
 
-int				decal_lem(t_attr_paths **tab, int len)
+static int			decal_lem(t_attr_paths **tab, int len)
 {
 	int		i;
 
