@@ -11,5 +11,7 @@ main.c
 lem_in
 *.trace
 out
+log
+visu/__pycache__
 .DS_Store
 .vscode
