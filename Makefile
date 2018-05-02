@@ -6,7 +6,7 @@
 #    By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 11:15:51 by mfonteni          #+#    #+#              #
-#    Updated: 2018/04/29 17:51:24 by abouvero         ###   ########.fr        #
+#    Updated: 2018/05/02 13:11:14 by abouvero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ SRC_NAME = get_list.c \
 	   del_list.c \
 	   debug.c \
 	   paths.c \
+	   paths_tools.c \
 	   moove_lem.c \
+	   moove_lems_tools.c \
 	   attr_lem.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj

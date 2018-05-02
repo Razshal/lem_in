@@ -6,82 +6,18 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/29 14:22:35 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:03:13 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
-
-t_path			*last(t_path *path)
-{
-	while (path->next)
-		path = path->next;
-	return (path);
-}
-
-t_room_list		*get_min_addr(t_room_links *links)
-{
-	int			min;
-	t_room_list	*room;
-
-	min = INTMAX;
-	room = NULL;
-	while (links)
-	{
-		if (links->room->weight != -1 && !links->room->traffic
-			&& links->room->weight < min)
-		{
-			min = links->room->weight;
-			room = links->room;
-		}
-		links = links->next;
-	}
-	return (room);
-}
-
-int				get_min(t_room_links *rl)
-{
-	int 	min;
-
-	min = INTMAX;
-	while (rl)
-	{
-		if (rl->room->weight != -1 && !rl->room->traffic)
-			min = rl->room->weight < min ? rl->room->weight : min;
-		rl = rl->next;
-	}
-	return (min == INTMAX ? -1 : min + 1);
-}
-
-int				initialized(t_room_links *links)
-{
-	while (links)
-	{
-		if (links->room->weight != -1 && !links->room->traffic)
-			return (1);
-		links = links->next;
-	}
-	return (0);
-}
-
-void			restart_weight(t_room_list *rl)
-{
-	while (rl)
-	{
-		//if (!rl->traffic)
-		//{
-			rl->weight = rl->type == END ? 0 : -1;
-			rl = rl->next;
-		//}
-	}
-}
 
 int				init_weight(t_room_list *rl)
 {
 	t_room_list *beg;
 
 	beg = rl;
-	restart_weight(rl); //FONCTION MYSTERIEUSE
+	restart_weight(rl);
 	while (rl)
 	{
 		if (rl->weight == -1 && initialized(rl->l_rooms) && rl->type != START)
@@ -148,19 +84,6 @@ t_room_list	*get_start(t_room_list *rl)
 	return (NULL);
 }
 
-t_path		*apply_traffic(t_path *path)
-{
-	t_path	*beg;
-
-	beg = path;
-	while (path)
-	{
-		path->room->traffic = path->room->type == END ? 0 : 1;
-		path = path->next;
-	}
-	return (beg);
-}
-
 int			ft_list_size_path(t_path *path)
 {
 	return (!path ? 0 : 1 + ft_list_size_path(path->next));
@@ -170,16 +93,10 @@ t_path		*get_path(t_room_list *rl)
 {
 	t_path *path;
 
-	//REGLER LE RETUR ARRIERE SUR DEALAGE DE LEM
-	//REGLER LEAK SUR LES PATHS NON VALIDE
-	//BIG NOT RESPONDING (PEUT ETRE LA TAILLE DU CHEMIN)
-	//GERER L'OUTPUT (espace et \n en trop)
-
 	if (init_weight(rl))
 		return (NULL);
 	if (!(path = solve_path(get_start(rl))))
 		return (NULL);
 	path->length = ft_list_size_path(path);
-	//return (apply_traffic(path));
 	return (path);
 }
