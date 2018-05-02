@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   attr_lem.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:56 by abouvero          #+#    #+#             */
-/*   Updated: 2018/04/29 17:43:05 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:29:54 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int				get_score(t_attr_paths **tab, int len, int min)
 {
 	int		i;
 	int		score;
+
 	i = -1;
 	while (++i < len && (*tab)[i].lem_nbr)
 		(*tab)[i].total_length = (*tab)[i].path->length + (*tab)[i].lem_nbr - 1;
 	score = (*tab)[i - 1].total_length - (*tab)[0].total_length;
-	//ft_printf("%d SCORE : %d | MIN :%d \n",i, score, min );
 	return (i - 1 < len || score < min ? score : -1);
 }
 
@@ -48,8 +48,8 @@ int				decal_lem(t_attr_paths **tab, int len)
 	i = -1;
 	while (++i < len - 1)
 	{
-
-		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr + ((*tab)[i].path->length == (*tab)[i + 1].path->length ? 0 : 1))
+		if ((*tab)[i].lem_nbr > (*tab)[i + 1].lem_nbr
+		+ ((*tab)[i].path->length == (*tab)[i + 1].path->length ? 0 : 1))
 		{
 			(*tab)[i].lem_nbr -= 1;
 			(*tab)[i + 1].lem_nbr += 1;
@@ -70,12 +70,6 @@ t_attr_paths	*calc_lems_by_path(t_lem_list *lem, int lem_nbr, int len)
 	init_path_tab(&tab, lem, lem_nbr, len);
 	while ((min = get_score(&tab, len, min)) != -1)
 		if (decal_lem(&tab, len))
-		{
-			//INFO("DECAL BREAK");
-			break;
-		}
-	// //INFO("CALC_LEM DONE");
-	//print_tabss(tab, len, min);
-	//free_unused_paths(tab, len);
+			break ;
 	return (tab);
 }
