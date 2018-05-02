@@ -31,6 +31,7 @@ def parse(roomList, pipeList, AntList, toMove):
 	i = 1
 	lines = getLines()
 	if lines[0] == "ERROR":
+		print("ERROR")
 		exit()
 	AntList = initAnts(int(lines[0]), AntList)
 	while i < len(lines):
