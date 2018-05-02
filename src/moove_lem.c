@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 15:23:09 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:24:14 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 	{
 		lem = beg;
 		print_and_moove(lem);
-		ft_printf("\n");
+		if (!all_arrived(beg))
+			ft_printf("\n");
 	}
 	free_paths(tab, len);
 	ft_memdel((void**)&tab);
