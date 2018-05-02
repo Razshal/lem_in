@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:35:23 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:08:37 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,18 @@ int				ft_list_size_lem(t_lem_list *lem)
 	return (!lem ? 0 : 1 + ft_list_size_lem(lem->next));
 }
 
-void			assign_lem(t_lem_list *lem, t_attr_paths *tab)
+void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 {
 	int		i;
 
 	i = 0;
 	while (lem)
 	{
-		if (!tab[i].lem_nbr)
-			i++;
-		if (tab[i].lem_nbr > 0)
-		{
+		if (i == len)
+			i = 0;
+		if (tab[i].lem_nbr)
 			lem->path = tab[i].path;
-			tab[i].lem_nbr -= 1;
-		}
+		i++;
 		lem = lem->next;
 	}
 }
@@ -47,7 +45,7 @@ t_attr_paths	*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	path_nbr = get_path_nbr(lem);
 	if (!(tab = calc_lems_by_path(lem, lem_nbr, path_nbr)))
 		return (NULL);
-	assign_lem(lem, tab);
+	assign_lem(lem, tab, path_nbr);
 	*len = path_nbr;
 	return (tab);
 }
