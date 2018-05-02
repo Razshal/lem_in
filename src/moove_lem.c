@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 14:08:37 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 14:19:40 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 		if (i == len)
 			i = 0;
 		if (tab[i].lem_nbr)
+		{
 			lem->path = tab[i].path;
+			tab[i].lem_nbr -= 1;
+		}
 		i++;
 		lem = lem->next;
 	}
