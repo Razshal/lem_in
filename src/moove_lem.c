@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 14:19:40 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:13:13 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 	while (lem)
 	{
 		if (i == len)
+			i = 0;
+		if (!tab[i].lem_nbr)
 			i = 0;
 		if (tab[i].lem_nbr)
 		{
@@ -60,7 +62,7 @@ void			print_and_moove(t_lem_list *lem)
 	i = 0;
 	while (lem)
 	{
-		lem->arrived = !lem->path->next;
+		lem->arrived = lem->path->next ? 0 : 1;
 		if (!lem->arrived && !lem->path->next->room->occupied)
 		{
 			if (i > 0)
@@ -69,7 +71,6 @@ void			print_and_moove(t_lem_list *lem)
 			lem->path->room->occupied = 0;
 			lem->path = lem->path->next;
 			lem->path->room->occupied = lem->path->next ? 1 : 0;
-			lem->arrived = !lem->path->next;
 			i++;
 		}
 		lem = lem->next;
