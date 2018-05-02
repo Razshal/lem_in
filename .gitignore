@@ -9,6 +9,7 @@ main.c
 *.ghc
 *.dSYM/
 lem_in
+lem-in
 *.trace
 out
 log
