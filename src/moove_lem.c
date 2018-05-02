@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 15:24:14 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:25:25 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int				ft_list_size_lem(t_lem_list *lem)
 void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 {
 	int		i;
+	int		j;
 
 	i = 0;
+	j = -1;
 	while (lem)
 	{
-		if (i == len)
-			i = 0;
-		if (!tab[i].lem_nbr)
+		if (i == len || !tab[i].lem_nbr)
 			i = 0;
 		if (tab[i].lem_nbr)
 		{
@@ -34,6 +34,15 @@ void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 			tab[i].lem_nbr -= 1;
 		}
 		i++;
+		if (!lem->path)
+		{
+			while (++j < len)
+				if (tab[j].lem_nbr)
+				{
+					lem->path = tab[j].path;
+					tab[j].lem_nbr -= 1;
+				}
+		}
 		lem = lem->next;
 	}
 }
