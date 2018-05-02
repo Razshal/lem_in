@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 14:19:40 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 15:22:25 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void			print_and_moove(t_lem_list *lem)
 			lem->path->room->occupied = 0;
 			lem->path = lem->path->next;
 			lem->path->room->occupied = lem->path->next ? 1 : 0;
-			lem->arrived = !lem->path->next;
 			i++;
 		}
 		lem = lem->next;
