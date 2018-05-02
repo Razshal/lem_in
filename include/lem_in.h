@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/30 12:25:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:10:09 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,15 @@ int				append_line(char *str, t_map **map);
 int				display_map(t_map *map);
 void			free_map(t_map **map);
 void			recfr_path(t_path *path);
+t_path			*last(t_path *path);
+t_room_list		*get_min_addr(t_room_links *links);
+int				get_min(t_room_links *rl);
+int				initialized(t_room_links *links);
+void			restart_weight(t_room_list *rl);
+void			free_paths(t_attr_paths *tab, int len);
+int				all_arrived(t_lem_list *lem);
+int				get_diff_path(t_lem_list *lem, t_room_list *rl);
+int				get_path_nbr(t_lem_list *lem);
 
 //////////////// DEBUG ////////////////////
 void			print_path(t_path *path);
