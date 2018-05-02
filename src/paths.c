@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:31:27 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:37:50 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int				init_weight(t_room_list *rl)
 
 t_path			*add_path(t_path *path, t_room_list *room)
 {
-	t_path	*new;
-	t_path  *beg;
+	t_path *new;
+	t_path *beg;
 
 	room->traffic = room->type == END ? 0 : 1;
 	if (!(new = (t_path*)malloc(sizeof(t_path))))

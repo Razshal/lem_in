@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   paths_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 13:02:40 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:03:20 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:34:32 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_room_list		*get_min_addr(t_room_links *links)
 
 int				get_min(t_room_links *rl)
 {
-	int 	min;
+	int min;
 
 	min = INTMAX;
 	while (rl)
@@ -68,7 +68,7 @@ void			restart_weight(t_room_list *rl)
 {
 	while (rl)
 	{
-			rl->weight = rl->type == END ? 0 : -1;
-			rl = rl->next;
+		rl->weight = rl->type == END ? 0 : -1;
+		rl = rl->next;
 	}
 }

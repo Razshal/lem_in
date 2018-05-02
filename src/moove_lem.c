@@ -6,18 +6,18 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:25:05 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:35:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-int		ft_list_size_lem(t_lem_list *lem)
+int				ft_list_size_lem(t_lem_list *lem)
 {
 	return (!lem ? 0 : 1 + ft_list_size_lem(lem->next));
 }
 
-void	assign_lem(t_lem_list *lem, t_attr_paths *tab)
+void			assign_lem(t_lem_list *lem, t_attr_paths *tab)
 {
 	int		i;
 
@@ -35,7 +35,7 @@ void	assign_lem(t_lem_list *lem, t_attr_paths *tab)
 	}
 }
 
-t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
+t_attr_paths	*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 {
 	int				lem_nbr;
 	int				path_nbr;
@@ -52,7 +52,7 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	return (tab);
 }
 
-void	print_and_moove(t_lem_list *lem)
+void			print_and_moove(t_lem_list *lem)
 {
 	int		i;
 
@@ -75,7 +75,7 @@ void	print_and_moove(t_lem_list *lem)
 	}
 }
 
-int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
+int				moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 {
 	t_lem_list		*beg;
 	t_attr_paths	*tab;

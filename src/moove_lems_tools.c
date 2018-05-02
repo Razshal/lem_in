@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lems_tools.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 13:07:45 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:08:29 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:37:22 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/lem_in.h"
 
-void 	recfr_path(t_path *path)
+void		recfr_path(t_path *path)
 {
 	if (!path)
 		return ;
@@ -31,7 +31,7 @@ void		free_paths(t_attr_paths *tab, int len)
 		recfr_path(tab[i].path);
 }
 
-int 	all_arrived(t_lem_list *lem)
+int			all_arrived(t_lem_list *lem)
 {
 	while (lem)
 	{
@@ -42,7 +42,7 @@ int 	all_arrived(t_lem_list *lem)
 	return (1);
 }
 
-int		get_diff_path(t_lem_list *lem, t_room_list *rl)
+int			get_diff_path(t_lem_list *lem, t_room_list *rl)
 {
 	int		done;
 
@@ -57,9 +57,9 @@ int		get_diff_path(t_lem_list *lem, t_room_list *rl)
 	return (done);
 }
 
-int		get_path_nbr(t_lem_list *lem)
+int			get_path_nbr(t_lem_list *lem)
 {
-	int 	i;
+	int i;
 
 	i = 0;
 	while (lem)
