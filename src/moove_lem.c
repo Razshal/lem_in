@@ -6,7 +6,7 @@
 /*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:08:25 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:21:54 by abouvero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ t_attr_paths		*attr_lems(t_lem_list *lem, t_room_list *rl, int *len)
 	return (tab);
 }
 
+void	print_and_moove(t_lem_list *lem)
+{
+	int		i;
+
+	i = 0;
+	while (lem)
+	{
+		lem->arrived = !lem->path->next;
+		if (!lem->arrived && !lem->path->next->room->occupied)
+		{
+			if (i > 0)
+				ft_putchar(' ');
+			ft_printf("L%d-%s", lem->lem, lem->path->next->room->name);
+			lem->path->room->occupied = 0;
+			lem->path = lem->path->next;
+			lem->path->room->occupied = lem->path->next ? 1 : 0;
+			lem->arrived = !lem->path->next;
+			i++;
+		}
+		lem = lem->next;
+	}
+}
+
 int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 {
 	t_lem_list		*beg;
@@ -66,21 +89,7 @@ int		moove_lems(t_lem_list *lem, t_room_list *rl, t_map *map)
 	while (!all_arrived(beg))
 	{
 		lem = beg;
-		while (lem)
-		{
-			lem->arrived = !lem->path->next;
-			if (!lem->arrived && !lem->path->next->room->occupied)
-			{
-				ft_printf("L%d-%s", lem->lem, lem->path->next->room->name);
-				lem->path->room->occupied = 0;
-				lem->path = lem->path->next;
-				lem->path->room->occupied = lem->path->next ? 1 : 0;
-				lem->arrived = !lem->path->next;
-				if (lem->next && !lem->next->arrived && !all_arrived(beg))
-					ft_putchar(' ');
-			}
-			lem = lem->next;
-		}
+		print_and_moove(lem);
 		ft_printf("\n");
 	}
 	free_paths(tab, len);
