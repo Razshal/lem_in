@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 14:40:36 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/04/27 15:52:48 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:12:23 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	parse_line(t_recurse *infos, t_map **map)
 		else if (!ft_strcmp(infos->line, "##start")
 		&& append_line(infos->line, map) && get_next_line(0, &infos->line))
 			return (split_and_add_room(infos->line, START, infos));
-		return (0);
+		return (1);
 	}
 	return (split_and_add_room(infos->line, CLASSICROOM, infos));
 }
