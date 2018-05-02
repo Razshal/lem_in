@@ -6,7 +6,7 @@
 /*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:13:11 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 13:37:50 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:50:57 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,12 @@ static t_path	*solve_path(t_room_list *rl)
 	return (path);
 }
 
-t_room_list	*get_start(t_room_list *rl)
-{
-	while (rl)
-	{
-		if (rl->type == START)
-			return (rl);
-		rl = rl->next;
-	}
-	return (NULL);
-}
-
-int			ft_list_size_path(t_path *path)
+int				ft_list_size_path(t_path *path)
 {
 	return (!path ? 0 : 1 + ft_list_size_path(path->next));
 }
 
-t_path		*get_path(t_room_list *rl)
+t_path			*get_path(t_room_list *rl)
 {
 	t_path *path;
 

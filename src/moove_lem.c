@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moove_lem.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 13:12:18 by abouvero          #+#    #+#             */
-/*   Updated: 2018/05/02 16:25:25 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 16:48:34 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ void			assign_lem(t_lem_list *lem, t_attr_paths *tab, int len)
 		}
 		i++;
 		if (!lem->path)
-		{
 			while (++j < len)
 				if (tab[j].lem_nbr)
 				{
 					lem->path = tab[j].path;
 					tab[j].lem_nbr -= 1;
 				}
-		}
 		lem = lem->next;
 	}
 }
