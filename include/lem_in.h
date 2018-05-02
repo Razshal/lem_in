@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouvero <abouvero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 12:50:37 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/05/02 13:10:09 by abouvero         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:30:51 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,5 @@ void			free_paths(t_attr_paths *tab, int len);
 int				all_arrived(t_lem_list *lem);
 int				get_diff_path(t_lem_list *lem, t_room_list *rl);
 int				get_path_nbr(t_lem_list *lem);
-
-//////////////// DEBUG ////////////////////
-void			print_path(t_path *path);
-#define BUGERROR			ft_printf("{RED}BUGERROR{EOC}\n")
-#define ERROR(message)		ft_printf("{RED}%s{EOC}\n", message)
-#define SUCCESSM(message)	ft_printf("{GREEN}%s{EOC}\n", message)
-#define INFO(message)		ft_printf("{BLUE}%s{EOC}\n", message)
-#include <stdio.h>
-void print_struct(t_recurse *recurse);
-int print_lem_struct(t_lem_list *list);
-///////////////////////////////////////////
 
 #endif
