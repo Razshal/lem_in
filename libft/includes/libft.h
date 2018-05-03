@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfonteni <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mfonteni <mfonteni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 11:11:55 by mfonteni          #+#    #+#             */
-/*   Updated: 2018/03/19 13:51:49 by mfonteni         ###   ########.fr       */
+/*   Updated: 2018/05/03 12:59:08 by mfonteni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int				ft_atoi(const char *str);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_str_isdigit(char *str);
+int				ft_str_is_stricly_digit(char *str);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_isprint(int c);
@@ -153,6 +154,7 @@ int				ft_getbyteslength(wchar_t c);
 int				colorprinter(char *str);
 int				get_next_line(const int fd, char **line);
 int				noleaks_get_next_line(const int fd, char **line);
+
 typedef struct	s_fd
 {
 	int		fd;
